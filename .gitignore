@@ -1,0 +1,8 @@
+.idea
+*.sqlite3
+venv
+*.pyc
+bauhausbrasil/__pycache__/
+gestao_escolar.pem
+static
+media

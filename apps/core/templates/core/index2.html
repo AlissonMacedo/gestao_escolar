@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Shortcuts</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>What do you want to do?</th>
+                  <th class="hidden-xs">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <a>List all courses</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="{% url 'list_curso' %}" class="btn btn-xs btn-info">Access</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">List all students</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="{% url 'list_aluno' %}" class="btn btn-xs btn-info">Access</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">List all class</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="{% url 'list_turma' %}" class="btn btn-xs btn-info" href="#">Access</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Monthly Payment</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a class="btn btn-xs btn-info" href="#">Access</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            <h3 class="panel-title">Sectors</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name of Sector</th>
+                  <th class="hidden-xs">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <a href="#">Technology of Information</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="{% url 'list_projetores' %}" class="btn btn-xs btn-warning" href="#">List projectots</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Back-end</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a class="btn btn-xs btn-warning" href="#">Editar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Database</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a class="btn btn-xs btn-warning" href="#">Editar</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="#">Mobile</a>
+                  </td>
+                  <td class="hidden-xs">
+                    <a class="btn btn-xs btn-warning" href="#">Editar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

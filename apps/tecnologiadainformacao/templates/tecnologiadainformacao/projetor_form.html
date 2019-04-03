@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block container %}
+
+
+<div class="col-md-8">
+  <div class="panel panel-warning">
+    <div class="panel-heading text-center">
+        {% if object.id > 0 %}
+            <h3 class="panel-title">Editar o {{ limpezaprojetor.nome }}</h3>
+        {% else %}
+            <h3 class="panel-title">Cadastrar um novo projetor</h3>
+        {% endif %}
+        
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <form class="col s12" method="post" enctype="multipart/form-data">{% csrf_token %}
+              <div class="form-caduser">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+              </div>
+              <div>
+                <br>
+                {% if object.id > 0 %}
+                <div class="well well-lg">
+                    <h4><b>Documentos</b></h4>
+                    {% for documentoprojetor in object.documentoprojetor_set.all %}
+                    <li>
+                    <a href="{{ documentoprojetor.arquivo.url }}"> {{ documentoprojetor }}</a><br>
+                    </li>
+                    {% endfor %}
+                </div>  
+                {% endif %}
+              </div>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="">
+        <button class='btn btn-warning' 
+              type="submit">Salvar Cadastro</button>
+        {% if object.id > 0 %}
+          <a href="{% url 'delete_projetores' object.id %}" 
+                class="btn btn-danger">Deletar Projetor</a>
+          <a href="{% url 'create_documento_limpezaprojetores' object.id %}" 
+                class="btn btn-info">Anexar Documento</a>
+        {% endif %}    
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap %}
+
+
+{% block container %}
+
+{{ object }}
+
+<form class="" action="" method="post">
+  {% csrf_token %}
+  {{ form|bootstrap }}
+  <button type="submit">Salvar</button>
+  {% if object %}
+      
+          Deletar</a>
+
+      <button onclick="utilizouHoraExtra({{ object.id }})"
+          class="btn btn-info" type="button">Marcar como utilizado</button>
+      <button onclick="naoutilizouHoraExtra({{ object.id }})"
+          class="btn btn-info" type="button">Marcar como  não utilizado</button>
+  {% endif %}
+
+</form>
+<br>
+<h2 id="horas_atualizadas"> {{ object.funcionario.total_horas_extra }}.. </h2>
+
+  <p id="mensagem"></p>
+
+{% endblock %}
+
+<!-- Container jquery  -->
+{% block static %}
+
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/funcoes-ajax.js' %}"></script>
+
+{% endblock %}
+<!-- Container jquery  FIM -->

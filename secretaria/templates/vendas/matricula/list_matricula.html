@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Lista de Matriculas</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Nome do aluno</th>
+                <th scope="col">Turma | Professor | Dia da Semana | Status</th>
+                <th scope="col">Editar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for matricula in matriculas %}
+
+                <th scope="row">{{ matricula.id }}</th>
+                <th scope="row">{{ matricula.status }}</th>
+                <th scope="row">{{ matricula.nomeAluno }}</th>
+                <th scope="row">{{ matricula.turma }}</th>
+                <td><a class="btn btn-xs btn-warning" 
+                  href="{% url 'editar_matricula' matricula.id %}">Editar</a></td>
+              </tr>
+                {% endfor %}
+          </tbody>
+        </table>
+        <a class="btn btn-xs btn-warning" href="">Nova matricula</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

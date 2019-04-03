@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+<div class="row">
+      <div class="col-sm-12 col-md-12 col-ld-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Detalhaes sobre {{ object.nome }}</h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>
+                    <p href="#">Número de série:</p>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="#">{{ object.numerodeserie }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p href="#">Nome do Projetor:</p>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="#">{{ object.nome }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p href="#">Sala:</p>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="#">{{ object.sala }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p href="#">Empresa:</p>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="#">{{ object.empresa }}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p href="#">Observação:</p>
+                  </td>
+                  <td class="hidden-xs">
+                    <a href="#">{{ object.observacao }}</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+{% endblock %}

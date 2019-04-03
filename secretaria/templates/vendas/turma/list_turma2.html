@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block container %}
+  <div class="col-md-12">
+  <h4>Matricula de {{ aluno }}</h4>
+  </div>
+
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Selecionae uma Turma</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <thead>
+              <tr>
+                <th scope="col">Nome da Turma</th>
+                <th scope="col">Professor</th>
+                <th scope="col">Dia da Semana</th>
+                <th scope="col">Status</th>
+                <th scope="col">Data Início</th>
+                <th scope="col">Matricular</th>
+                <th scope="col">Ações</th>
+                <th scope="col">Contrato</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for turma in turmas %}
+
+                <th scope="row">{{ turma.turmadocurso }}</th>
+                <th scope="row">{{ turma.professor }}</th>
+                <th scope="row">{{ turma.diadasemana }}</th>
+                <th scope="row">{{ turma.status }}</th>
+                <th scope="row">{{ turma.datainicio }}</th>
+
+                
+                <td><a href="{% url 'novo_matricula' aluno.id turma.id %}" class="btn btn-xs btn-info">Matricular</a></td>
+
+                <td><a href="{% url 'editar_turma' turma.id %}"
+                  class="btn btn-xs btn-warning">Detalhes</a>
+                </td>
+
+                <td><a href=""
+                  class="btn btn-xs btn-primary">Contrato</a>
+                </td>
+              </tr>
+                {% endfor %}
+          </tbody>
+        </table>
+        <a class="btn btn-xs btn-warning" href="{% url 'novo_turma' %}">Nova Turma</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link href="{% static "css/style.css" %}" rel="stylesheet">
+        <meta charset="UTF-8">
+        <title>Populating a Select with Django</title>
+    </head>
+
+    <body>
+
+        <h1>Populate one dropdown based on selection in another.</h1>
+        <p>Change the contents of dropdown Car based on the selection in dropdown Brand, using Django + Javascript:</p>
+
+        <div class="select-style">
+            <br />Brand:
+            <select required id="brand">
+            </select>
+
+            <br />
+            <br />Car:
+            <select id="car" >
+            </select>
+        </div>
+
+
+    </body>
+
+
+
+
+<script language="javascript">
+    $('#brand').change(function() {populateCar()});
+    var cars = {{ cars|safe }}
+    var brands = {{ brands|safe }}
+    populateBrand();
+
+    function populateBrand() {
+        $("#brand").empty();
+        $("#brand").append('<option value="" disabled selected>Select your option</option>');
+        $.each(brands, function(v) {
+            $('#brand')
+                .append($("<option></option>")
+                .attr("value", brands[v])
+                .text(brands[v]));
+        })
+    }
+
+    function populateCar(event) {
+        brand = $("#brand option:selected" ).text();
+        $("#car").empty();
+
+        $("#car").append('<option value="" disabled selected>Select your option</option>');
+        for (let [b, bcars] of Object.entries(cars)) {
+            if (b==brand) {
+                for (car in bcars) {
+                    $('#car')
+                        .append($("<option></option>")
+                        .attr("value", bcars[car])
+                        .text(bcars[car]));
+                }
+            }
+        }
+
+    }
+
+</script>
+
+
+</html>

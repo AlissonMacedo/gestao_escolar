@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block container %}
+
+  <div class="col-md-8">
+    <div class="panel panel-warning ">
+     <div class="panel-heading text-center">
+         {% if matricula.id > 0 %}
+            <h3 class="panel-title">Editar uma Matricula</h3>
+         {% else %}
+            <h3 class="panel-title">Cadastrar uma nova Matricula</h3>
+         {% endif %}
+
+     </div>
+        <div class="col-md-12 text-center">
+            {% if matricula.id > 0 %}
+                <h5>Editar Matricula do aluno {{ matricula.nomeAluno }}</h5>
+            {% else %}
+                <h5>Registrar {{ aluno }} com nova Matricula</h5>
+            {% endif %}
+        </div>
+        <div class="col-md-12 text-center">
+            {% if matricula.id > 0 %}
+                <h5 class="title">Turma: {{ matricula.turma }}</h5>
+            {% else %}
+                <a href="" class="title">Turma: {{ turma }}</a><br>
+                <h5 href="" class="title">Preço: {{ turma.turmadocurso.preco }}
+                        Parcelamento: {{ turma.turmadocurso.parcelamento }}
+                        Desconto: {{ turma.turmadocurso.desconto }}</h5>
+            {% endif %}
+        </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+        <tbody>
+          <tr>
+            <form class="col s12" method="post" enctype="multipart/form-data">{% csrf_token %}
+              <div class="form-caduser">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+              </div>
+          </tr>
+        </tbody>
+      </table>
+      <div class=" ">
+        <button class='btn btn-xs btn-warning' type="submit">Salvar Cadastro</button>
+      </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

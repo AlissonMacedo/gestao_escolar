@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block container %}
+
+  <div class="col-md-8">
+    <div class="panel panel-warning">
+      <div class="panel-heading text-center">
+        <h3 class="panel-title">Cadastrar um novo curso</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <form class="col s12" method="post">{% csrf_token %}
+                <div class="form-caduser">
+                      {{ form|bootstrap }}
+                  </div>
+                </tr>
+            </tbody>
+          </table>
+          <div class=" ">
+            <button class='btn btn-xs btn-warning' type="submit">Salvar Cadastro</button>
+            {% if curso %}
+                <a href="{% url 'deletar_curso' curso.id %}" class="btn btn-xs btn-warning">Deletar Curso!</a>
+            {% endif %}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

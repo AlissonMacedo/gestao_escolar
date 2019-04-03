@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% block container %}
+
+
+<div class="col-md-8">
+  <div class="panel panel-warning">
+    <div class="panel-heading text-center">
+      <h3 class="panel-title">Cadastrar um novo funcionario</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <form class="col s12" method="post" enctype="multipart/form-data">{% csrf_token %}
+              <div class="form-caduser">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+              </div>
+              <div>
+                <br>
+                {% if object.id > 0 %}
+                  <div class="well well-sm">
+                    <h4><b>Documentos</b></h4>
+                    {% for documento in object.documento_set.all %}
+                        <li>
+                            <a href="{{ documento.arquivo.url }}"> {{ documento }}</a>
+                        </li>
+                    {% endfor %}
+                  </div>
+                  <div class="well well-sm">
+                      <h4><b>Banco de Horas</b></h4>
+                      {% for registro_hora in object.registrohoraextra_set.all %}
+                          <li>
+                            <a href="{% url 'update_hora_extra' registro_hora.id %}">
+                             {{ registro_hora.motivo }} | {{ registro_hora.horas }} <br>
+                          </li>
+                      {% endfor %}
+                  </div>
+                   
+
+                    <h4>Total de horas extras: {{ object.total_horas_extra }}</h4>
+                {% endif %}
+              </div>
+          </tr>
+        </tbody>
+      </table>
+      <div class=" ">
+        <button class='btn btn-warning' type="submit">Salvar Cadastro</button>
+        <a href="{% url 'create_documento' object.id %}" class="btn btn-info">Anexar Documento</a>
+        <a href="{% url 'create_hora_extra' object.id %}" class="btn btn-primary">Adicionar Hora Extra</a>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

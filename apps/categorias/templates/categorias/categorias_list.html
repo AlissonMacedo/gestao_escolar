@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+
+{% block container %}
+
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Departamentos</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nome Funcionario</th>
+              <th class="hidden-xs">Editar</th>
+              <th class="hidden-xs">Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                {% for categoria in object_list %}
+              <td>
+                  <a>{{ categoria }}</a>
+              </td>
+              <td>
+                <a class="btn btn-xs btn-info" href="{% url 'update_categoria' categoria.id %}">Editar</a>
+              </td>
+
+              <td class="hidden-xs">
+                  <a class="btn btn-xs btn-danger" href="{% url 'delete_categoria' categoria.id %}">Deletar</a>
+                </td>
+              </tr>
+              {% endfor %}
+
+              {% if not object_list %}
+                  <h4>Não existem Categorias cadastrados no sistema!</h4>
+              {% endif %}
+
+              </tbody>
+            </table>
+            <a href="{% url 'create_categoria'  %}" class="btn btn-info">Novo Departamento</a>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+
+
+
+
+<td>
+  <a>{{ categoria.nome }}</a>
+</td>
+<td class="hidden-xs">
+  <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-xs btn-warning">Editar</a>
+</td>
+</tr>

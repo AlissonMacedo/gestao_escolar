@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Lista de Projetores</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Número de série</th>
+              <th>Nome do Projetor</th>
+              <th>Sala do Projetor</th>
+              <th>Status</th>
+              <th class="hidden-xs">Detalhes</th>
+              <th class="hidden-xs">Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for Limpezaprojetor in object_list %}
+              <td>
+                  <a>{{ Limpezaprojetor.id }}</a>
+              </td>
+              <td>
+                  <a>{{ Limpezaprojetor.numerodeserie }}</a>
+              </td>
+              <td>
+                  <a>{{ Limpezaprojetor.nome }}</a>
+              </td>
+              <td>
+                  <a>{{ Limpezaprojetor.sala }}</a>
+              </td>
+              <td>
+                  <a>{{ Limpezaprojetor.status }}</a>
+              </td>
+              <td>
+                <a class="btn btn-xs btn-info" href="{% url 'detail_projetores' Limpezaprojetor.id %}">
+                  Detalhes</a>
+              </td>
+
+              <td class="hidden-xs">
+                  <a class="btn btn-xs btn-warning" href="{% url 'update_projetores' Limpezaprojetor.id %}">Editar</a>
+                </td>
+              </tr>
+              {% endfor %}
+
+              {% if not object_list %}
+                  <h4>Não existem funcionarios cadastrados no sistema!</h4>
+              {% endif %}
+              <
+              </tbody>
+            </table>
+            <a href="{% url 'create_projetor' %}" class="btn btn-info">Novo Projetor</a>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+
+<td>
+  <a>{{ categoria.nome }}</a>
+</td>
+<td class="hidden-xs">
+  <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-xs btn-warning">Editar</a>
+</td>
+</tr>

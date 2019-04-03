@@ -1,0 +1,201 @@
+{% load static %}
+{% load my_tags %}
+{% current_time "%d/%m/%y" as the_time %}
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0,
+          maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="imagem/png" href="{% static 'sistemaimagens/school.png' %}"/>
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'bootstrap/css/style.css' %}">
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+		<title>JUPITER v.1.0</title>
+</head>
+
+<body onload="startTime()">
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle pull-left">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				{% if user.funcionario.empresa %}
+          			<a class="navbar-brand" href="{% url 'dashboard' %}">{{ user.funcionario.empresa }}</a>
+        		{% else %}
+        			<a class="navbar-brand" href="{% url 'crete_empresa' %}">Criar Empresa</a>
+        		{% endif %}
+				<a class="navbar-brand">{{ the_time }}</a>
+				<a class="navbar-brand" id="txt"></a>
+
+				</div>
+				<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li ><a>Messages</a></li>
+					{% if user.is_authenticated %}
+				    	<a class="navbar-brand" href="{% url 'dashboard' %}">Hello {{ user.funcionario.nome }}</a>
+					{% else %}
+				    	<a class="navbar-brand" href="{% url 'login' %}">Olá visitante!</a>
+					{% endif %}
+
+					{% if user.is_authenticated %}
+					<li><a href="{% url 'mylogout' %}">Sair</a></li>
+					{% else %}
+					<li><a href="{% url 'login' %}">Login</a></li>
+					{% endif %}
+
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="main">
+		<div class="menu">
+			<ul>
+				<li><a href="{% url 'dashboard' %}"><i class="fa fa-lg fa-home"></i> Home</a></li>
+				        <li  data-toggle="collapse" data-target="#ti" class="collapsed active">
+          <a href="#"><i class="fa fa-lg fa-apple"></i>Tecnologia da Informação<span class="arrow"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="ti">
+          <li><a href="{% url 'list_projetores' %}">Projetores</a></li>
+        </ul>
+        <li  data-toggle="collapse" data-target="#rh" class="collapsed active">
+          <a href="#"><i class="fa fa-gift fa-lg"></i>Recursos Humanos <span class="arrow"></span></a>
+        </li>
+        <ul class="sub-menu collapse" id="rh">
+          <li><a href="{% url 'list_funcionarios' %}">Gerenciar Funcionarios</a></li>
+          <li><a href="{% url 'list_departamentos' %}">Gerenciar Departamento</a></li>
+          <li><a href="{% url 'list_hora_extra' %}">Gerenciar Banco de Horas</a></li>
+        </ul>
+				<li  data-toggle="collapse" data-target="#cursos" class="collapsed active">
+					<a href="#"><i class="fa fa-gift fa-lg"></i> Secretaria <span class="arrow"></span></a>
+				</li>
+				<ul class="sub-menu collapse" id="cursos">
+					<li><a href="{% url 'list_professores' %}">Listar de Professor</a></li>
+					<li><a href="{% url 'list_categoriacursos' %}">Listar de Categorias</a></li>
+					<li><a href="{% url 'list_curso' %}">Listar Cursos</a></li>
+					<li><a href="{% url 'list_sala' %}">Listar Salas de Aula</a></li>
+					<li><a href="{% url 'list_turma' %}">Listar Turmas</a></li>
+				</ul>
+				<li  data-toggle="collapse" data-target="#alunos" class="collapsed active">
+					<a href="#"><i class="fa fa-gift fa-lg"></i> Gestão de Alunos <span class="arrow"></span></a>
+				</li>
+				<ul class="sub-menu collapse" id="alunos">
+					<li><a href="{% url 'novo_aluno' %}">Cadastro de Alunos</a></li>
+					<li><a href="{% url 'list_aluno' %}">Listar Alunos</a></li>
+					<li><a href="{% url 'list_matricula' %}">Listar Matriculados</a></li>
+					<li><a href="#">Consulta de Carteirinhas de Alunos</a></li>
+					<li><a href="#">Consulta de Certificados de Alunos</a></li>
+				</ul>
+				<li  data-toggle="collapse" data-target="#financeiro" class="collapsed active">
+					<a href="#"><i class="fa fa-gift fa-lg"></i> Gestão de Financeiro <span class="arrow"></span></a>
+				</li>
+				<ul class="sub-menu collapse" id="financeiro">
+					<li><a href="#">Cadastro de Contas</a></li>
+					<li><a href="#">Consulta de Contas a pagar</a></li>
+					<li><a href="#">Consulta de Contas a receber</a></li>
+				</ul>
+		</div>
+
+
+<!-- Blocos Superiores de conteudo --->
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4 text-center">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Active Students</h3>
+          </div>
+          <div class="panel-body">
+            <h3 id="painel1">{% alunos_ativos %}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 text-center">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Active Class</h3>
+          </div>
+          <div class="panel-body">
+            <h3>{% turmas_ativas %}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 text-center">
+        <div class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title">Loked Students</h3>
+          </div>
+          <div class="panel-body">
+            <h3>{% alunos_naoativos %}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Fim  -->
+
+
+<!-- Container Central  -->
+{% block container %}
+
+{% endblock %}
+<!-- Container Central  FIM -->
+
+<!-- Container jquery  -->
+{% block static %}
+
+{% endblock %}
+<!-- Container jquery  FIM -->
+
+<!-- Container Para Relatorios  -->
+{% block staticcss %}
+
+{% endblock %}
+<!-- Container jquery  FIM -->
+
+</body>
+<script>
+$(document).ready(function(){
+    $(".navbar-toggle").click(function(){
+        $(".menu").toggleClass("menu-open");
+    })
+});
+
+// Time no topo da tela
+
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+
+</script>
+</html>

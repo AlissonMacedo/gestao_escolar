@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Banco de Horas</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nome Funcionario</th>
+              <th class="hidden-xs">Editar</th>
+              <th class="hidden-xs">Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            {% for registro_re in object_list %}
+                <td>
+                    <a>{{ registro_re.funcionario.nome }}</a>
+                </td>
+                <td class="hidden-xs">
+                    <a class="btn btn-xs btn-info" href="{% url 'update_hora_extra_base' registro_re.id %}">Editar</a>
+                </td>
+                <td class="hidden-xs">
+                    <a class="btn btn-xs btn-danger" href="{% url 'delete_hora_extra' registro_re.id %}">Deletar</a>
+                  </td>
+                </tr>
+                  {% endfor %}
+                  {% if not object_list %}
+                  <h4>Não existem regístros de hora extra no banco de dados</h4>
+                  {% endif %}
+              </tbody>
+            </table>
+            <a class="btn btn-xs btn-warning" href="{% url 'create_hora_extra' %}">Nova Hora Extra</a>
+            <a class="btn btn-xs btn-info" href="{% url 'pdf-reportlab' %}">Imprimir Relatório de Horas Extras</a>
+            <a class="btn btn-xs btn-info" href="{% url 'relatorio_funcionarios_html' %}">Imprimir Relatório de Horas Extras 2</a>
+            <a class="btn btn-xs btn-info" href="{% url 'exportar_csv' %}">Imprimir Relatório CSV</a>
+            <a class="btn btn-xs btn-info" href="{% url 'exportar_excel' %}">Imprimir Relatório Excel</a>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+
+
+
+
+<td>
+  <a>{{ categoria.nome }}</a>
+</td>
+<td class="hidden-xs">
+  <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-xs btn-warning">Editar</a>
+</td>
+</tr>

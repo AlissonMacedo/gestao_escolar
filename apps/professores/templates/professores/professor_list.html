@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+  <div class="col-md-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Lista de Professores</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Nome Professor</th>
+              <th class="hidden-xs">Editar</th>
+              <th class="hidden-xs">Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for professor in object_list %}
+              <td>
+                  <a>{{ professor }}</a>
+              </td>
+              <td>
+                <a class="btn btn-xs btn-info" href="{% url 'update_professor' professor.id %}">
+                  Editar</a>
+              </td>
+
+              <td class="hidden-xs">
+                  <a class="btn btn-xs btn-danger" href="{% url 'delete_professor' professor.id %}">Deletar</a>
+                </td>
+              </tr>
+              {% endfor %}
+
+              {% if not object_list %}
+                  <h4>Não existem professores cadastrados no sistema!</h4>
+              {% endif %}
+
+              </tbody>
+            </table>
+            <a href="{% url 'create_professor' %}" class="btn btn-info">Novo Professor</a>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
