@@ -39,9 +39,9 @@ class MatriculaFormEditar(forms.ModelForm):
 
 
 class TurmaForm(forms.ModelForm):
+    datainicio = forms.DateField(input_formats=["%d/%m/%Y",], widget=forms.DateInput(format='%d/%m/%Y')),
+    datafim = forms.DateField(input_formats=["%d/%m/%Y",], widget=forms.DateInput(format='%d/%m/%Y'))
+
     class Meta:
         model = Turma
-        fields = ['turmadocurso', 'professor', 'datainicio', 'datafim', 'diadasemana',
-        'status']
-        datainicio = forms.DateField(input_formats=["%d/%m/%Y",], widget=forms.DateInput(format='%d/%m/%Y')
-)
+        fields = ['turmadocurso', 'professor', 'datainicio', 'datafim', 'diadasemana','status']

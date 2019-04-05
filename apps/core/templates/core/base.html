@@ -52,7 +52,7 @@
             <ul class="left">
               <li>
                 <h1 class="logo-wrapper">
-                  <a href="index.html" class="brand-logo darken-1">
+                  <a href="{% url 'dashboard' %}" class="brand-logo darken-1">
                     <img src="{% static 'dashboard/images/logo/materialize-logo.png' %}" alt="materialize logo">
                     {% if user.funcionario.empresa %}
                     <span class="logo-text hide-on-med-and-down">{{ user.funcionario.empresa }}</span>
@@ -88,7 +88,7 @@
               <li>
                 <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown">
                   <span class="avatar-status avatar-online">
-                    <img src="{% static 'dashboard/images/avatar/avatar-7.png' %}" alt="avatar">
+                    <img src="{{ user.funcionario.imagem.url }}" alt="avatar">
                     <i></i>
                   </span>
                 </a>
@@ -190,7 +190,7 @@
         <!-- START LEFT SIDEBAR NAV-->
         <aside id="left-sidebar-nav">
           <ul id="slide-out" class="side-nav fixed leftside-navigation">
-            <li class="user-details cyan darken-2">
+            <li class="user-details cyan darken-2" style="background-image: url({% static 'home/images/gallary/12.png' no-repeat center center %});">
               <div class="row">
                 <div class="col col s4 m4 l4">
                   <img src="{{ user.funcionario.imagem.url }}" alt="" class="circle responsive-img valign profile-image cyan">
@@ -227,7 +227,7 @@
             <li class="no-padding">
               <ul class="collapsible" data-collapsible="accordion">
                 <li class="bold">
-                  <a href="index.html" class="waves-effect waves-cyan">
+                  <a href="{% url 'dashboard' %}" class="waves-effect waves-cyan">
                       <i class="material-icons">pie_chart_outlined</i>
                       <span class="nav-text">Dashboard</span>
                     </a>
@@ -238,6 +238,52 @@
                       <span class="nav-text">Cards</span>
                     </a>
                 </li>
+                <!-- SUBMENU ADMINISTRATIVO -->
+                <ul class="collapsible collapsible-accordion">
+                  <li>
+                    <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>ADMINISTRATIVO<i class="material-icons right" style="margin-right:0;"></i></a>
+                    <div class="collapsible-body">
+                  <ul>
+                    <li><a href="{% url 'list_funcionarios' %}" class="waves-effect waves-blue" ><i class="material-icons">swap_horiz</i>Funcionarios</a></li>
+                    <li><a href="{% url 'list_departamentos' %}" class="waves-effect waves-blue"><i class="material-icons">label_outline</i>Departamentos</a></li>
+                    <li><a class="waves-effect waves-blue"><i class="material-icons">swap_horiz</i>Empresa</a></li>
+                    <li><div class="divider"></div></li>
+                  </ul>
+                </ul>
+
+              </ul>
+              <!-- FIM DO SUBMENU-->
+              <!-- SUBMENU SECRETARIA -->
+              <ul class="collapsible collapsible-accordion">
+                <li>
+                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>SECRETARIA<i class="material-icons right" style="margin-right:0;"></i></a>
+                  <div class="collapsible-body">
+                <ul>
+                  <li><a href="{% url 'list_alunos' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">fullscreen</i>Alunos</a></li>
+                  <li><a class="waves-effect waves-blue"><i class="material-icons">pageview</i>Matriculas</a></li>
+                  <li><a href="{% url 'list_categorias' %}"class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Categorias</a></li>
+                  <li><a href="{% url 'list_professores' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">perm_identity</i>Professores</a></li>
+                  <li><a href="{% url 'list_turmas' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">rowing</i>Turmas</a></li>
+                  <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">work</i>Salas</a></li>
+
+                  <li><div class="divider"></div></li>
+                </ul>
+              </ul>
+            <!-- FIM DO SUBMENU SECRETARIA-->
+            <!-- SUBMENU VENDAS -->
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>VENDAS<i class="material-icons right" style="margin-right:0;"></i></a>
+                <div class="collapsible-body">
+              <ul>
+                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Matriculas</a></li>
+                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Interessados</a></li>
+                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Cursos</a></li>
+
+                <li><div class="divider"></div></li>
+              </ul>
+            </ul>
+          <!-- FIM DO SUBMENU VENDAS-->
                 <li class="bold">
                   <a href="ui-basic-buttons.html" class="waves-effect waves-cyan">
                       <i class="material-icons">insert_link</i>
@@ -288,143 +334,7 @@
         </aside>
         <!-- END LEFT SIDEBAR NAV-->
         <!-- //////////////////////////////////////////////////////////////////////////// -->
-        <!-- START CONTENT -->
-        <section id="content">
-          <!--start container-->
-          <div class="container">
-            <!--card stats start-->
-            <div id="card-stats">
-              <div class="row mt-1">
-                <div class="col s12 m6 l3">
-                  <div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-                    <div class="padding-4">
-                      <div class="col s7 m7">
-                        <i class="material-icons background-round mt-5">add_shopping_cart</i>
-                        <p>Active Student</p>
-                      </div>
-                      <div class="col s5 m5 right-align">
-                        <h5 class="mb-0">{% alunos_ativos %}</h5>
-                        <p class="no-margin">New</p>
-                        <p>{% alunos_ativos %}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col s12 m6 l3">
-                  <div class="card gradient-45deg-red-pink gradient-shadow min-height-100 white-text">
-                    <div class="padding-4">
-                      <div class="col s7 m7">
-                        <i class="material-icons background-round mt-5">perm_identity</i>
-                        <p>Loked Student</p>
-                      </div>
-                      <div class="col s5 m5 right-align">
-                        <h5 class="mb-0">{% alunos_naoativos %}</h5>
-                        <p class="no-margin">New</p>
-                        <p>{% alunos_naoativos %}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col s12 m6 l3">
-                  <div class="card gradient-45deg-amber-amber gradient-shadow min-height-100 white-text">
-                    <div class="padding-4">
-                      <div class="col s7 m7">
-                        <i class="material-icons background-round mt-5">timeline</i>
-                        <p>Sales</p>
-                      </div>
-                      <div class="col s5 m5 right-align">
-                        <h5 class="mb-0">80%</h5>
-                        <p class="no-margin">Growth</p>
-                        <p>3,42,230</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col s12 m6 l3">
-                  <div class="card gradient-45deg-green-teal gradient-shadow min-height-100 white-text">
-                    <div class="padding-4">
-                      <div class="col s7 m7">
-                        <i class="material-icons background-round mt-5">attach_money</i>
-                        <p>Profit</p>
-                      </div>
-                      <div class="col s5 m5 right-align">
-                        <h5 class="mb-0">$890</h5>
-                        <p class="no-margin">Today</p>
-                        <p>$25,000</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- <div id="card-stats">-->
-            <!--  <div class="row">-->
-            <!--    <div class="col s12 m6 l3">-->
-            <!--      <div class="card">-->
-            <!--        <div class="card-content cyan white-text">-->
-            <!--          <p class="card-stats-title">-->
-            <!--            <i class="material-icons">person_outline</i> New Clients</p>-->
-            <!--          <h4 class="card-stats-number">566</h4>-->
-            <!--          <p class="card-stats-compare">-->
-            <!--            <i class="material-icons">keyboard_arrow_up</i> 15%-->
-            <!--            <span class="cyan text text-lighten-5">from yesterday</span>-->
-            <!--          </p>-->
-            <!--        </div>-->
-            <!--      </div>-->
-            <!--    </div>-->
-            <!--    <div class="col s12 m6 l3">-->
-            <!--      <div class="card">-->
-            <!--        <div class="card-content red accent-2 white-text">-->
-            <!--          <p class="card-stats-title">-->
-            <!--            <i class="material-icons">attach_money</i>Total Sales</p>-->
-            <!--          <h4 class="card-stats-number">$8990.63</h4>-->
-            <!--          <p class="card-stats-compare">-->
-            <!--            <i class="material-icons">keyboard_arrow_up</i> 70%-->
-            <!--            <span class="red-text text-lighten-5">last month</span>-->
-            <!--          </p>-->
-            <!--        </div>-->
-            <!--      </div>-->
-            <!--    </div>-->
-            <!--    <div class="col s12 m6 l3">-->
-            <!--      <div class="card">-->
-            <!--        <div class="card-content teal accent-4 white-text">-->
-            <!--          <p class="card-stats-title">-->
-            <!--            <i class="material-icons">trending_up</i> Today Profit</p>-->
-            <!--          <h4 class="card-stats-number">$806.52</h4>-->
-            <!--          <p class="card-stats-compare">-->
-            <!--            <i class="material-icons">keyboard_arrow_up</i> 80%-->
-            <!--            <span class="teal-text text-lighten-5">from yesterday</span>-->
-            <!--          </p>-->
-            <!--        </div>-->
-                    
-            <!--      </div>-->
-            <!--    </div>-->
-            <!--    <div class="col s12 m6 l3">-->
-            <!--      <div class="card">-->
-            <!--        <div class="card-content deep-orange accent-2 white-text">-->
-            <!--          <p class="card-stats-title">-->
-            <!--            <i class="material-icons">content_copy</i> New Invoice</p>-->
-            <!--          <h4 class="card-stats-number">1806</h4>-->
-            <!--          <p class="card-stats-compare">-->
-            <!--            <i class="material-icons">keyboard_arrow_down</i> 3%-->
-            <!--            <span class="deep-orange-text text-lighten-5">from last month</span>-->
-            <!--          </p>-->
-            <!--        </div>-->
-            <!--      </div>-->
-            <!--    </div>-->
-            <!--  </div>-->
-            <!--</div> -->
-            <!--card stats end-->
 
-            <!--card widgets start-->
-              
-            <!--work collections end-->
-            <!-- //////////////////////////////////////////////////////////////////////////// -->
-          </div>
-          <!--end container-->
-
-          <!-- //////////////////////////////////////////////////////////////////////////// -->
-          <!---------------- Container Central  ------------------------->
           {% block container %}
 
           {% endblock %}
@@ -548,7 +458,7 @@
                       <p class="medium-small blue-grey-text text-lighten-3">Hello Boo </p>
                     </a>
                     <a href="#!" class="collection-item avatar border-none">
-                      <img src="{% static 'dashboard/images/avatar/avatar-3.png' %}" alt="" class="circle teal accent-4">
+                      <img src="{% static 'dashboard/images/avatar/avatar-2.png' %}" alt="" class="circle teal accent-4">
                       <span class="line-height-0">Caleb Richards </span>
                       <span class="medium-small right blue-grey-text text-lighten-3">9.00 PM</span>
                       <p class="medium-small blue-grey-text text-lighten-3">Keny ! </p>
@@ -596,13 +506,13 @@
                       <p class="medium-small blue-grey-text text-lighten-3">Like you </p>
                     </a>
                     <a href="#!" class="collection-item avatar border-none">
-                      <img src="{% static 'dashboard/images/avatar/avatar-2.png' %} alt="" class="circle red accent-2">
+                      <img src="{% static 'dashboard/images/avatar/avatar-1.png' %}" alt="" class="circle red accent-2">
                       <span class="line-height-0">Daniel Russell </span>
                       <span class="medium-small right blue-grey-text text-lighten-3">12.00 AM</span>
                       <p class="medium-small blue-grey-text text-lighten-3">Thank you </p>
                     </a>
                     <a href="#!" class="collection-item avatar border-none">
-                      <img src="{% static 'dashboard/images/avatar/avatar-3.png' %}" alt="" class="circle teal accent-4">
+                      <img src="{% static 'dashboard/images/avatar/avatar-2.png' %}" alt="" class="circle teal accent-4">
                       <span class="line-height-0">Sarah Graves </span>
                       <span class="medium-small right blue-grey-text text-lighten-3">11.14 PM</span>
                       <p class="medium-small blue-grey-text text-lighten-3">Okay you </p>

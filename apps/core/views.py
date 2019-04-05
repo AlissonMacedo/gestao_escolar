@@ -13,6 +13,11 @@ def dashboard(request):
     return render(request, 'core/index.html', {'empresa_logada':empresa_logada, 'turmas':turmas})
 
 @login_required
+def administracao(request):
+    empresa_logada = request.user.funcionario.empresa
+    return render(request, 'core/administracao.html', {'empresa_logada':empresa_logada})
+
+@login_required
 def my_logout(request):
     logout(request)
     return redirect('dashboard')

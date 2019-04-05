@@ -1,59 +1,99 @@
-
-{% extends "base.html" %}
-
+{% extends "core/base.html" %}
+{% load static %}
 {% block container %}
-
-  <div class="col-md-12">
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <h3 class="panel-title">Departamentos</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Nome Funcionario</th>
-              <th class="hidden-xs">Editar</th>
-              <th class="hidden-xs">Deletar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-                {% for departamento in object_list %}
-              <td>
-                  <a>{{ departamento}}</a>
-              </td>
-              <td>
-                <a class="btn btn-xs btn-info" href="{% url 'update_departamento' departamento.id %}">Editar</a>
-              </td>
-
-              <td class="hidden-xs">
-                  <a class="btn btn-xs btn-danger" href="{% url 'delete_departamento' departamento.id %}">Deletar</a>
-                </td>
-              </tr>
-              {% endfor %}
-
-              {% if not object_list %}
-                  <h4>Não existem Categorias cadastrados no sistema!</h4>
-              {% endif %}
-
-              </tbody>
-            </table>
-            <a href="{% url 'create_departamentos'  %}" class="btn btn-info">Novo Departamento</a>
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+      <!-- START CONTENT -->
+      <section id="content">
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+          <!-- Search for small screen -->
+          <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+            <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title">Lista de Departamentos</h5>
+                <ol class="breadcrumbs">
+                  <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="{% url 'administrativo' %}">Administrativo</a></li>
+                  <li class="active">Lista de Departamentos</li>
+                </ol>
+              </div>
+              <div class="col s2 m6 l6">
+                <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+                    <i class="material-icons hide-on-med-and-up">settings</i>
+                    <span class="hide-on-small-onl">Settings</span>
+                    <i class="material-icons right">arrow_drop_down</i>
+                  </a>
+                <ul id="dropdown1" class="dropdown-content">
+                  <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <!--breadcrumbs end-->
+        <!--start container-->
+        <div class="container">
+          <div class="section">
 
+            <!--Striped Table-->
+            <div class="divider"></div>
+            <div id="striped-table">
+              <div class="header-search-wrapper hide-on-med-and-down">
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Pesquisar..." />
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <table class="striped centeredresponsive-table">
+                    <thead>
+                      <tr>
+                        <th data-field="id">Id</th>
+                        <th data-field="nome">Departamento</th>
+                        <th data-field="price">Empresa</th>
+                        <th data-field="edit">Editar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for departamento in object_list %}
+                        <tr>
+                          <td>{{ departamento.id }}</td>
+                          <td>{{ departamento }}</td>
+                          <td>{{ departamento.empresa }}</td>
+                          <td><a class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+    </div>
+    <style>
+      .fixed-action-btn{
+                margin-bottom: 18px;  //optional
+      }
+    </style>
+        <!-- END WRAPPER -->
+            <!-- SART BUTTON -->
+    <div class="fixed-action-btn botao">
+        <a class="btn-floating btn-large waves-effect waves-light red">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
+      <!-- END BUTTON -->
+  </div>
+
+  <!-- END MAIN -->
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
 {% endblock %}
-
-
-
-
-
-<td>
-  <a>{{ categoria.nome }}</a>
-</td>
-<td class="hidden-xs">
-  <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-xs btn-warning">Editar</a>
-</td>
-</tr>

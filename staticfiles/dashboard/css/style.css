@@ -6165,7 +6165,6 @@ li.home:before {
   position: absolute;
   left: 48%;
   top: 46%;
-  background: url("../../images/avatar/avatar-2.png") no-repeat center center;
   z-index: 1001;
 }
 
@@ -6639,7 +6638,6 @@ ul.side-nav.leftside-navigation li:not(.no-padding) a {
 }
 
 ul.side-nav.leftside-navigation li:not(.no-padding).user-details {
-  background-image: url('{{ STATIC_URL }}/dashboard/images/gallary/16.png') no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

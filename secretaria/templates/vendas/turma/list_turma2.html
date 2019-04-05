@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "core/base.html" %}
 
 {% block container %}
   <div class="col-md-12">
@@ -35,7 +35,7 @@
                 <th scope="row">{{ turma.status }}</th>
                 <th scope="row">{{ turma.datainicio }}</th>
 
-                
+
                 <td><a href="{% url 'novo_matricula' aluno.id turma.id %}" class="btn btn-xs btn-info">Matricular</a></td>
 
                 <td><a href="{% url 'editar_turma' turma.id %}"

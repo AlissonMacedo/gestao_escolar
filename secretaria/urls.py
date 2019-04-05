@@ -23,14 +23,14 @@ urlpatterns = [
 
 #---- URLs Turmas -----------------------------------------------
 
-     path('vendas/listar_turma/', list_turma, name='list_turma'),
+     path('vendas/listar_turma/', list_turma, name='list_turmas'),
      path('vendas/listar_turma2/<int:idaluno>', list_turma2, name='list_turma2'),
      path('vendas/novo_turma/', novo_turma, name='novo_turma'),
      path('vendas/editar_turma/<int:id>', editar_turma, name='editar_turma'),
      path('vendas/deletar_turma/<int:id>', deletar_turma, name='deletar_turma'),
-     path('vendas/detail/<int:pk>/', ListTurmasDetail.as_view(), 
+     path('vendas/detail/<int:pk>/', ListTurmasDetail.as_view(),
         name='detail_turma'),
-    path('vendas/matriculadosturma/<int:id>/', MatriculadosTurmaList, 
+    path('vendas/matriculadosturma/<int:id>/', MatriculadosTurmaList,
         name='matriculadosturma'),
 
 

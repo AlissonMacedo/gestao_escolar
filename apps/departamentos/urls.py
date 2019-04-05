@@ -10,7 +10,7 @@ from .views import (
 
 urlpatterns = [
 
-    path('list/', DepartamentosList.as_view(), name='list_departamentos'),
+    path('list_departamentos/', DepartamentosList.as_view(), name='list_departamentos'),
     path('novo/', DepartamentoCreate.as_view(), name='create_departamentos'),
     path('editar/<int:pk>/', DepartamentoEdit.as_view(),
             name='update_departamento'),

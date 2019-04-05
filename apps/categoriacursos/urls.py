@@ -10,9 +10,9 @@ from .views import (
 
 urlpatterns = [
 
-    path('list/', CategoriaCursosList.as_view(), 
-                    name='list_categoriacursos'),
-    path('novo/', CategoriaCursosCreate.as_view(), 
+    path('list_categoria/', CategoriaCursosList.as_view(),
+                    name='list_categorias'),
+    path('novo/', CategoriaCursosCreate.as_view(),
                     name='create_categoriacursos'),
     path('editar/<int:pk>/', CategoriaCursosEdit.as_view(),
                     name='update_categoriacursos'),

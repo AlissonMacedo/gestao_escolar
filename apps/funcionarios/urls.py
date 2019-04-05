@@ -9,7 +9,7 @@ from .views import (
 from .views import relatorio_funcionarios
 
 urlpatterns = [
-    path('', FuncionariosList.as_view(), 
+    path('list_funcionarios', FuncionariosList.as_view(), 
         name='list_funcionarios'),
     path('novo/', FuncionarioNovo.as_view(),
         name='create_funcionario'),

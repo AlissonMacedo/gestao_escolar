@@ -233,7 +233,7 @@
 	<section id="fh5co-intro">
 		<div class="container">
 			<div class="row row-bottom-padded-lg">
-				<div class="fh5co-block to-animate" style="background-image: url(images/img_7.jpg);">
+				<div class="fh5co-block to-animate" style="background-image: url({% static 'home/images/img_7.jpg' %});">
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
@@ -243,7 +243,7 @@
 						<p><a href="#" class="btn btn-primary">Get In Touch</a></p>
 					</div>
 				</div>
-				<div class="fh5co-block to-animate" style="background-image: url(images/img_8.jpg);">
+				<div class="fh5co-block to-animate" style="background-image: url({% static 'home/images/img_8.jpg' %});">
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
@@ -253,7 +253,7 @@
 						<p><a href="#" class="btn btn-primary">Click Me</a></p>
 					</div>
 				</div>
-				<div class="fh5co-block to-animate" style="background-image: url(images/img_10.jpg);">
+				<div class="fh5co-block to-animate" style="background-image: url({% static 'home/images/img_10.jpg' %});">
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
@@ -503,7 +503,7 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="fh5co-person text-center to-animate">
-						<figure><img src="{% static 'home/images/man.jpg' %}" alt="Image"></figure>
+						<figure><img src="{% static 'home/images/man-1.jpg' %}" alt="Image"></figure>
 						<h3>Jean Smith</h3>
 						<span class="fh5co-position">Web Designer</span>
 						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts</p>
@@ -542,9 +542,9 @@
 				</div>
 			</div>
 		</div>
-	</section>			
+	</section>
 
-	<section id="fh5co-counters" style="background-image: url(home/images/full_image_1.jpg);" data-stellar-background-ratio="0.5">
+	<section id="fh5co-counters" style="background-image: url({% static 'home/images/full_image_1.jpg' %});" data-stellar-background-ratio="0.5">
 		<div class="fh5co-overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -719,9 +719,10 @@
 	<script src="{% static 'home/js/magnific-popup-options.js'%}"></script>
 	<!-- Google Map -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-	<script src="js/google_map.js"></script>
+	<script src="{% static 'home/js/google_map.js' %}"></script>
 
-	<!-- For demo purposes only styleswitcher ( You may delete this anytime ) 
+
+	<!-- For demo purposes only styleswitcher ( You may delete this anytime )
 	<script src="js/jquery.style.switcher.js"></script>
 	<script>
 		$(function(){

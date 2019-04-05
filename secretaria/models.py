@@ -71,7 +71,7 @@ class Turma(models.Model):
     empresa = models.ForeignKey(
         Empresa, on_delete=models.PROTECT, null=True, blank=True)
     sala = models.ForeignKey(SalaDeAula,  on_delete=models.DO_NOTHING)
-    
+
 
     DIADASEMANA_CHOICES = (
         (" ---- ", " ---- "),
@@ -103,7 +103,7 @@ class Turma(models.Model):
 
     def __str__(self):
         return self.turmadocurso.nome + '  -   Prof  ' + self.professor.primeironome + ' ' + self.professor.segundonome + ' | ' + self.diadasemana + ' | ' + self.status
-    
+
     def list_matriculas_a_verificar(self):
         return self.turmadocurso.nome + '  -   Prof  ' + self.professor.primeironome + ' | ' + self.diadasemana + ' | ' + self.status
 
@@ -112,9 +112,17 @@ class Turma(models.Model):
         aulas = (self.datafim - self.datainicio).days
         aulas = aulas / 7
         return round(aulas)
-    
-    @property
+
     def date_diff2(self):
+        hoje = timezone.now()
+        tempocorrido = (hoje - self.datainicio).days
+        tempocorrido = tempocorrido / 7
+        if tempocorrido < 1:
+            tempocorrido = 1
+        return round(tempocorrido)
+
+    @property
+    def date_diff3(self):
         hoje = timezone.now()
         totaldias = (self.datafim - self.datainicio).days
         tempocorrido = (hoje - self.datainicio).days
@@ -128,7 +136,6 @@ class Turma(models.Model):
 
 
 class Matricula(models.Model):
-    id = models.IntegerField(primary_key=True)
     nomeAluno = models.ForeignKey(
         Aluno, on_delete=models.DO_NOTHING, verbose_name='Aluno', related_name='Aluno')
     turma = models.ForeignKey(
@@ -157,7 +164,7 @@ class Matricula(models.Model):
         ordering = ['nomeAluno']
 
     def __str__(self):
-        return self.nomeAluno + ' ' + self.professor
+        return self.nomeAluno
 
 
 # ----------------------------------------------------
@@ -176,4 +183,3 @@ class Car(models.Model):
 
     def __str__(self):
         return {'name': self.name, 'brand': self.brand.company_name}
-        

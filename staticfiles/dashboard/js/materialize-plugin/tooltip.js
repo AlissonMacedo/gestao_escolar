@@ -235,5 +235,6 @@
 
   $(document).ready(function(){
      $('.tooltipped').tooltip();
+
    });
 }( jQuery ));
