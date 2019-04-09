@@ -140,14 +140,17 @@ class Matricula(models.Model):
         Aluno, on_delete=models.DO_NOTHING, verbose_name='Aluno', related_name='Aluno')
     turma = models.ForeignKey(
         Turma, on_delete=models.DO_NOTHING, verbose_name='Turma', related_name='Turma')
-    preco = models.DecimalField('Preço', decimal_places=2, max_digits=10)
-    totalapagar = models.DecimalField(
-        'Total a Pagar', decimal_places=2, max_digits=10)
+    preco =models.IntegerField('preco', blank=True)
+    totalapagar = models.IntegerField('total a pagar', blank=True)
     desconto = models.IntegerField('Desconto', blank=True)
     parcelamento = models.IntegerField('Parcelamento X Vezes ', blank=True)
+    varlorparcelas = models.IntegerField('Valor Parcelas ', blank=True)
     empresa = models.ForeignKey(
         Empresa, on_delete=models.PROTECT, null=True, blank=True)
     observacao = models.TextField('Observação', null=True, blank=True)
+
+    #models.DecimalField(
+        #'Total a Pagar', decimal_places=2, max_digits=10)
 
     STATUS_CHOICES = (
         ("CURSANDO", "Cursando"),
@@ -164,7 +167,7 @@ class Matricula(models.Model):
         ordering = ['nomeAluno']
 
     def __str__(self):
-        return self.nomeAluno
+        return self.nomeAluno.primeironome
 
 
 # ----------------------------------------------------

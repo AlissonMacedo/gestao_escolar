@@ -11,7 +11,7 @@ from .views import (
 urlpatterns = [
 
     path('list_departamentos/', DepartamentosList.as_view(), name='list_departamentos'),
-    path('novo/', DepartamentoCreate.as_view(), name='create_departamentos'),
+    path('novo/', DepartamentoCreate.as_view(), name='novo_departamento'),
     path('editar/<int:pk>/', DepartamentoEdit.as_view(),
             name='update_departamento'),
     path('deletar/<int:pk>/', DepartamentoDelete.as_view(),

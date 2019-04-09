@@ -30,27 +30,28 @@ function naoutilizouHoraExtra(id){
             console.log(result);
             $("#mensagem").text(result.mensagem);
             $("#horas_atualizadas").text(result.horas);
-            
+
         }
     });
 }
 
-function atualizaPainel(){
-    console.log(id);
-    token = "teste";
+function calculaparcelamento(){
 
+    token = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+    id = document.getElementsByName("departamentos").value;
+
+    console.log(id);
     $.ajax({
-        type: 'GET',
-        url: '/core/index.html/',
+        type: 'POST',
+        url: '/vendas/consulta_parcelamento/' + id + '/',
         data: {
             csrfmiddlewaretoken: token
         },
         success: function(result){
             console.log(result);
-            $("#painel1").text(result.painel1);
-            $("#painel2").text(result.painel2);
-            $("#painel3").text(result.painel3);
-            
+            $("#mensagem").text(result.mensagem);
+            $("#horas_atualizadas").text(result.horas);
+
         }
     });
 }

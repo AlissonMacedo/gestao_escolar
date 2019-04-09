@@ -9,7 +9,7 @@ from .models import (
     Matricula,
     Turma
 )
-
+from apps.departamentos.models import Departamento
 from django.views.generic import (
     ListView,
     DetailView,
@@ -19,6 +19,9 @@ from django.views.generic import (
 )
 
 from .forms import CursoForm, SalaForm, MatriculaForm, MatriculaFormEditar, TurmaForm
+
+from django.core import serializers
+from django.http import HttpResponse
 
 from .models import Brand, Car
 
@@ -163,7 +166,7 @@ def deletar_turma(request, id):
 
 
 @login_required
-def list_matricula(request):
+def list_matriculas(request):
     matriculas = Matricula.objects.all()
     return render(request, 'vendas/matricula/list_matricula.html', {'matriculas': matriculas})
 
@@ -172,17 +175,32 @@ def novo_matricula(request, idaluno, idturma):
     aluno = Aluno.objects.get(id=idaluno)
     turma = Turma.objects.get(id=idturma)
     form = MatriculaForm(request.POST or None, request.FILES or None)
+    parcelas = turma.turmadocurso.parcelamento
+    preco = turma.turmadocurso.preco
+    desconto = turma.turmadocurso.desconto
 
     if form.is_valid():
         novamatricula = form.save(commit=False)
         novamatricula.nomeAluno = aluno
         novamatricula.turma = turma
+        novamatricula.preco = preco
+        novamatricula.totalapagar = preco - desconto
+        novamatricula.desconto = desconto
+        novamatricula.varlorparcelas = novamatricula.totalapagar / novamatricula.parcelamento
         novamatricula.empresa = request.user.funcionario.empresa
         novamatricula.save()
 
-        return redirect('list_matricula')
+        return redirect('list_matriculas')
 
-    return render(request, 'vendas/matricula/novo_matricula.html', {'form': form, 'aluno': aluno, 'turma': turma})
+    return render(request, 'vendas/matricula/novo_matricula.html',
+        {'form': form, 'aluno': aluno, 'turma': turma, 'range':range(0,parcelas), 'parcelas':parcelas})
+
+
+def consulta_parcelamento(POST, id):
+    a = id
+
+    qs_json = serializers.serialize('json', a)
+    return HttpResponse(qs_json, content_type='application/json')
 
 
 @login_required

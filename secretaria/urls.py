@@ -16,9 +16,10 @@ urlpatterns = [
 
 #---- URLs de Matriculas -----------------------------------------------
 
-     path('vendas/listar_matricula/', list_matricula, name='list_matricula'),
+     path('vendas/listar_matriculas/', list_matriculas, name='list_matriculas'),
      path('vendas/novo_matricula/<int:idaluno>/<int:idturma>', novo_matricula, name='novo_matricula'),
      path('vendas/editar_matricula/<int:id>', editar_matricula, name='editar_matricula'),
+     path('vendas/consulta_parcelamento/<int:id>', consulta_parcelamento, name='consulta_parcelamento'),
  #   path('vendas/deletar_professor/<int:id>', deletar_professor, name='deletar_professor'),
 
 #---- URLs Turmas -----------------------------------------------

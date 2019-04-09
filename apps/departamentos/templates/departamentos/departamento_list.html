@@ -68,7 +68,7 @@
                           <td>{{ departamento.id }}</td>
                           <td>{{ departamento }}</td>
                           <td>{{ departamento.empresa }}</td>
-                          <td><a class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
+                          <td><a class="waves-effect waves-light btn-small" href="{% url 'update_departamento' departamento.id %}"><i class="material-icons">edit</i></a></td>
                         </tr>
                       {% endfor %}
                     </tbody>
@@ -81,13 +81,13 @@
     </div>
     <style>
       .fixed-action-btn{
-                margin-bottom: 18px;  //optional
+                margin-bottom: 23px;  //optional
       }
     </style>
         <!-- END WRAPPER -->
             <!-- SART BUTTON -->
     <div class="fixed-action-btn botao">
-        <a class="btn-floating btn-large waves-effect waves-light red">
+        <a href="{% url 'novo_departamento' %}"class="btn-floating btn-large waves-effect waves-light red">
           <i class="large material-icons">add</i>
         </a>
     </div>

@@ -1,57 +1,111 @@
 {% extends "core/base.html" %}
-
+{% load static %}
 {% block container %}
-  <div class="col-md-12">
-  <h4>Matricula de {{ aluno }}</h4>
-  </div>
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+      <!-- START CONTENT -->
+      <section id="content">
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+          <!-- Search for small screen -->
+          <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+            <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title">Lista de Turmas - Selecionar um aluno para matricular</h5>
+                <ol class="breadcrumbs">
+                  <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="#">Secretaria</a></li>
+                  <li class="active">Lista de Turmas</li>
+                </ol>
+              </div>
+              <div class="col s2 m6 l6">
+                <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+                    <i class="material-icons hide-on-med-and-up">settings</i>
+                    <span class="hide-on-small-onl">Settings</span>
+                    <i class="material-icons right">arrow_drop_down</i>
+                  </a>
+                <ul id="dropdown1" class="dropdown-content">
+                  <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
+        <!--start container-->
+        <div class="container">
+          <div class="section">
 
-  <div class="col-md-12">
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <h3 class="panel-title">Selecionae uma Turma</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-hover">
-          <thead>
-            <thead>
-              <tr>
-                <th scope="col">Nome da Turma</th>
-                <th scope="col">Professor</th>
-                <th scope="col">Dia da Semana</th>
-                <th scope="col">Status</th>
-                <th scope="col">Data Início</th>
-                <th scope="col">Matricular</th>
-                <th scope="col">Ações</th>
-                <th scope="col">Contrato</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {% for turma in turmas %}
+            <!--Striped Table-->
+            <div class="divider"></div>
+            <div id="striped-table">
+              <div class="header-search-wrapper hide-on-med-and-down">
+                <input type="text" name="Search" class="header-search-input z-depth-2"
+                  placeholder="Pesquisar..." />
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <table class="striped centeredresponsive-table">
+                    <thead>
+                      <tr>
+                        <th data-field="id">Id</th>
+                        <th data-field="nome">Turma</th>
+                        <th data-field="nome">Professor</th>
+                        <th data-field="nome">Dia/Semana</th>
+                        <th data-field="nome">Status</th>
+                        <th data-field="price">Inicio</th>
+                        <th data-field="edit">Fim</th>
+                        <th data-field="edit">Matricular</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for turma in turmas %}
+                        <tr>
+                          <td>{{ turma.id }}</td>
+                          <td>{{ turma.turmadocurso }}</td>
+                          <td>{{ turma.professor }}</td>
+                          <td>{{ turma.diadasemana }}</td>
+                          <td>{{ turma.status }}</td>
+                          <td>{{ turma.datainicio|date:"d/m/y" }}</td>
+                          <td>{{ turma.datafim|date:"d/m/y" }}</td>
+                          <td><a class="waves-effect waves-light btn-small"
+                            href="{% url 'novo_matricula' aluno.id turma.id %}">
+                            <i class="material-icons">school</i></a></td>
 
-                <th scope="row">{{ turma.turmadocurso }}</th>
-                <th scope="row">{{ turma.professor }}</th>
-                <th scope="row">{{ turma.diadasemana }}</th>
-                <th scope="row">{{ turma.status }}</th>
-                <th scope="row">{{ turma.datainicio }}</th>
-
-
-                <td><a href="{% url 'novo_matricula' aluno.id turma.id %}" class="btn btn-xs btn-info">Matricular</a></td>
-
-                <td><a href="{% url 'editar_turma' turma.id %}"
-                  class="btn btn-xs btn-warning">Detalhes</a>
-                </td>
-
-                <td><a href=""
-                  class="btn btn-xs btn-primary">Contrato</a>
-                </td>
-              </tr>
-                {% endfor %}
-          </tbody>
-        </table>
-        <a class="btn btn-xs btn-warning" href="{% url 'novo_turma' %}">Nova Turma</a>
-      </div>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
     </div>
+    <style>
+      .fixed-action-btn{
+                margin-bottom: 18px;  //optional
+      }
+    </style>
+        <!-- END WRAPPER -->
+            <!-- SART BUTTON -->
+    <div class="fixed-action-btn botao">
+        <a class="btn-floating btn-large waves-effect waves-light red">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
+      <!-- END BUTTON -->
   </div>
 
+  <!-- END MAIN -->
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
 {% endblock %}

@@ -26,7 +26,8 @@ class SalaForm(forms.ModelForm):
 class MatriculaForm(forms.ModelForm):
    class Meta:
        model = Matricula
-       fields = ['preco','desconto', 'parcelamento', 'totalapagar', 'observacao']
+       fields = ['preco','desconto', 'parcelamento', 'totalapagar',
+       'observacao']
 
 
 class MatriculaFormEditar(forms.ModelForm):

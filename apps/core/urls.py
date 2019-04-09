@@ -9,5 +9,6 @@ urlpatterns = [
 
     path('dashboard/', dashboard, name='dashboard'),
     path('administrativo/', administracao, name='administrativo'),
+    path('secretaria/', secretaria, name='secretaria'),
     path('logout/', my_logout, name='mylogout')
 ]

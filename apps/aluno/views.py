@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.views.generic import (
         ListView,
         UpdateView,
@@ -26,6 +27,12 @@ class Alunolist(ListView):
         empresa_logada = self.request.user.funcionario.empresa
         return Aluno.objects.filter(empresa=empresa_logada)
 
+
+def Alunolist2(request):#list aluno para fazer uma nova matricula
+    empresa_logada = request.user.funcionario.empresa
+    alunos = Aluno.objects.filter(empresa=empresa_logada)
+    return render(request, 'aluno/aluno_list2.html', {'alunos':alunos})
+
 class AlunoEdit(UpdateView):
     model = Aluno
     fields = ['primeironome','segundonome','idade','cpf','RG',
@@ -40,7 +47,7 @@ class AlunoNovo(CreateView):
     model = Aluno
     fields = ['primeironome', 'segundonome', 'idade', 'cpf', 'RG',
         'datadenascimento','responsavel']
-    
+
     def form_valid(self, form):
         aluno = form.save(commit=False)
         aluno.empresa = self.request.user.funcionario.empresa

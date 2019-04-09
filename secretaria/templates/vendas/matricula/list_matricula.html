@@ -1,42 +1,101 @@
-{% extends "base.html" %}
-
+{% extends "core/base.html" %}
+{% load static %}
 {% block container %}
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+      <!-- START CONTENT -->
+      <section id="content">
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+          <!-- Search for small screen -->
+          <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+            <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title">Lista de Matriculas</h5>
+                <ol class="breadcrumbs">
+                  <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="{% url 'secretaria' %}">Secretaria</a></li>
+                  <li class="active">Lista de Matriculas</li>
+                </ol>
+              </div>
+              <div class="col s2 m6 l6">
+                <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+                    <i class="material-icons hide-on-med-and-up">settings</i>
+                    <span class="hide-on-small-onl">Settings</span>
+                    <i class="material-icons right">arrow_drop_down</i>
+                  </a>
+                <ul id="dropdown1" class="dropdown-content">
+                  <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
+        <!--start container-->
+        <div class="container">
+          <div class="section">
 
-  <div class="col-md-12">
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <h3 class="panel-title">Lista de Matriculas</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-hover">
-          <thead>
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Status</th>
-                <th scope="col">Nome do aluno</th>
-                <th scope="col">Turma | Professor | Dia da Semana | Status</th>
-                <th scope="col">Editar</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {% for matricula in matriculas %}
-
-                <th scope="row">{{ matricula.id }}</th>
-                <th scope="row">{{ matricula.status }}</th>
-                <th scope="row">{{ matricula.nomeAluno }}</th>
-                <th scope="row">{{ matricula.turma }}</th>
-                <td><a class="btn btn-xs btn-warning" 
-                  href="{% url 'editar_matricula' matricula.id %}">Editar</a></td>
-              </tr>
-                {% endfor %}
-          </tbody>
-        </table>
-        <a class="btn btn-xs btn-warning" href="">Nova matricula</a>
-      </div>
+            <!--Striped Table-->
+            <div class="divider"></div>
+            <div id="striped-table">
+              <div class="header-search-wrapper hide-on-med-and-down">
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Pesquisar..." />
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <table class="striped centeredresponsive-table">
+                    <thead>
+                      <tr>
+                        <th data-field="id">Id</th>
+                        <th data-field="nome">Status</th>
+                        <th data-field="price">Aluno</th>
+                        <th data-field="edit">Turma</th>
+                        <th data-field="edit">Editar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for matricula in matriculas %}
+                        <tr>
+                          <td>{{ matricula.id }}</td>
+                          <td>{{ matricula.status }}</td>
+                          <td>{{ matricula.nomeAluno }}</td>
+                          <td>{{ matricula.turma }}</td>
+                          <td><a class="waves-effect waves-light btn-small" href=""><i class="material-icons">edit</i></a></td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
     </div>
+    <style>
+      .fixed-action-btn{
+                margin-bottom: 23px;  //optional
+      }
+    </style>
+        <!-- END WRAPPER -->
+            <!-- SART BUTTON -->
+    <div class="fixed-action-btn botao">
+        <a href="{% url 'list_alunos_nova_matricula' %}"class="btn-floating btn-large waves-effect waves-light red">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
+      <!-- END BUTTON -->
   </div>
 
+  <!-- END MAIN -->
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
 {% endblock %}
-
