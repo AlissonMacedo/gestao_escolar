@@ -1,28 +1,68 @@
 {% extends "core/base.html" %}
-{% load bootstrap %}
+{% load static %}
 {% block container %}
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+      <!-- START CONTENT -->
+      <section id="content">
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+          <!-- Search for small screen -->
+          <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+            <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title">Nova Matricula</h5>
+                <ol class="breadcrumbs">
+                  <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="{% url 'secretaria' %}">Secretaria</a></li>
+                  <li><a href="{% url 'list_matriculas' %}">Matriculas</a></li>
+                  <li class="active">Nova Matricula</li>
+                </ol>
+              </div>
+              <div class="col s2 m6 l6">
+                <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+                    <i class="material-icons hide-on-med-and-up">settings</i>
+                    <span class="hide-on-small-onl">Settings</span>
+                    <i class="material-icons right">arrow_drop_down</i>
+                  </a>
+                <ul id="dropdown1" class="dropdown-content">
+                  <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+                  </li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
 
-  <div class="col-md-8">
-    <div class="panel panel-warning">
-      <div class="panel-heading text-center">
-        <h3 class="panel-title">Cadastrar uma nova Matricula</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-hover">
-          <tbody>
-            <tr>
-              <form class="col s12" method="post">{% csrf_token %}
-                <div class="form-caduser">
-                      {{ form|bootstrap }}
-                  </div>
-                </tr>
-            </tbody>
-          </table>
-          <div class=" ">
-            <button class='btn btn-xs btn-warning' type="submit">Salvar Cadastro</button>
-            {% if matricula %}
-                <a href="{% url 'deletar_matricula' matricula.matriculaid %}" class="btn btn-xs btn-warning">Deletar Curso!</a>
-            {% endif %}
+            <!--Striped Table-->
+            <div class="divider"></div>
+            <!--start container-->
+            <div class="container">
+              <div id="basic-form" class="section">
+                <!-- Inline Form -->
+                <div class="row">
+                  <div class="col s12 m12 l12">
+                    <div class="card-panel center">
+                      <div class="row">
+                      <form class="col s12" method="post">{% csrf_token %}
+                        <div class="form-caduser">
+                              {{ form }}
+                        </div>
+                        <div class=" ">
+                        <button class='btn btn-xs btn-warning' type="submit">Salvar Cadastro</button>
+                        {% if matricula %}
+                        <a href="" class="btn btn-xs btn-warning">Deletar Curso!</a>
+                        {% endif %}
           </div>
         </form>
       </div>

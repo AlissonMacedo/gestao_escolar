@@ -9,7 +9,7 @@ from .models import (
     Matricula,
     Turma
 )
-from apps.departamentos.models import Departamento
+
 from django.views.generic import (
     ListView,
     DetailView,
@@ -19,11 +19,10 @@ from django.views.generic import (
 )
 
 from .forms import CursoForm, SalaForm, MatriculaForm, MatriculaFormEditar, TurmaForm
-
+from .models import Brand, Car
+from apps.departamentos.models import Departamento
 from django.core import serializers
 from django.http import HttpResponse
-
-from .models import Brand, Car
 
 
 # ----------------------- Funcões para Cursos ----------------------------------
@@ -164,7 +163,6 @@ def deletar_turma(request, id):
 
 # ---------- Funções para matricula ------------------------------------------
 
-
 @login_required
 def list_matriculas(request):
     matriculas = Matricula.objects.all()
@@ -196,25 +194,34 @@ def novo_matricula(request, idaluno, idturma):
         {'form': form, 'aluno': aluno, 'turma': turma, 'range':range(0,parcelas), 'parcelas':parcelas})
 
 
-def consulta_parcelamento(POST, id):
-    a = id
-
-    qs_json = serializers.serialize('json', a)
-    return HttpResponse(qs_json, content_type='application/json')
-
-
 @login_required
 def editar_matricula(request, id):
     matricula = Matricula.objects.get(id=id)
+    empresa_logada = request.user.funcionario.empresa
+    aluno = matricula.nomeAluno
+    turma = matricula.turma
+
+    departamentos = Departamento.objects.all()
+
     form = MatriculaFormEditar(request.POST or None,
                                request.FILES or None, instance=matricula)
 
     if form.is_valid():
         form.save()
-        return redirect('list_matricula')
+        return redirect('list_matriculas')
 
-    return render(request, 'vendas/matricula/novo_matricula.html', {'form': form, 'matricula': matricula})
+    return render(request, 'vendas/matricula/novo_matricula.html', {'form': form, 'matricula': matricula, 'aluno':aluno, 'turma':turma})
 
+def deletar_matricula(request, id):
+    matricula = Matricula.objects.get(id=id)
+
+    if request.method == 'POST':
+        turma.delete()
+        return redirect('list_matriculas')
+
+    return render(request, 'vendas/listar_matriculas/list_matricula.html', {'matricula': matricula})
+
+# ---------- Funções para matricula ------------------------------------------
 
 @login_required
 def deletar_turma(request, id):
@@ -235,6 +242,12 @@ def MatriculadosTurmaList(request, id):
 
     return render(request, 'vendas/turma/matriculados_turma.html', {'matriculas':matriculas})
 
+def filtra_funcionarios(request):
+    depart = request.GET['outro_param']
+    departamento = Departamento.objects.get(id=depart)
+
+    qs_json = serializers.serialize('json', departamento.funcionario_set.all())
+    return HttpResponse(qs_json, content_type='application/json')
 
 # -------------------------------------------------------------------------
 

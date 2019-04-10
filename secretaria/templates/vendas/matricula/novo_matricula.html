@@ -15,12 +15,20 @@
           <div class="container">
             <div class="row">
               <div class="col s10 m6 l6">
-                <h5 class="breadcrumbs-title">Nova Matricula</h5>
+                {% if matricula %}
+                  <h5 class="breadcrumbs-title">Editar Matricula</h5>
+                  {% else %}
+                    <h5 class="breadcrumbs-title">Nova Matricula</h5>
+                  {% endif %}
                 <ol class="breadcrumbs">
                   <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                   <li><a href="{% url 'secretaria' %}">Secretaria</a></li>
                   <li><a href="{% url 'list_matriculas' %}">Matriculas</a></li>
-                  <li class="active">Nova Matricula</li>
+                  {% if matricula %}
+                    <li class="active">Editar Matricula</li>
+                    {% else %}
+                      <li class="active">Nova Matricula</li>
+                    {% endif %}
                 </ol>
               </div>
               <div class="col s2 m6 l6">
@@ -56,13 +64,27 @@
                       <div class="row">
                         <!-- Idela para editar <input id="your_name" type="text" name="your_name" value="{{ current_name }}"> -->
                           <form class="col s12" action="" method="post">{% csrf_token %}
-                          <h4 class="header2">Nova matricula de {{ aluno.primeironome }} {{ aluno.segundonome }}</h4>
+                          {% if matricula %}
+                            <h4 class="header2">Editar matricula de {{ aluno.primeironome }} {{ aluno.segundonome }}</h4>
+                            {% else %}
+                              <h4 class="header2">Nova matricula de {{ aluno.primeironome }} {{ aluno.segundonome }}</h4>
+                              {% endif %}
                           <div class="row">
+                            <div class="input-field col s12 m12 l3">
+                              <p>Id da Matricula:</p>
+                            </div>
+                            <div class="input-field col s4 m12 l9 left">
+                              {% if matricula %}
+                                <p>{{ matricula.id }}</p>
+                                {% else %}
+                                <p>Nova matricula...</p>
+                                {% endif %}
+                            </div>
                             <div class="input-field col s12 m12 l3">
                               <p>Nome do curso:</p>
                             </div>
                             <div class="input-field col s4 m12 l9 left">
-                              <p>id:{{ turma.turmadocurso.id }} Turma:{{ turma.turmadocurso }}</p>
+                              <p>{{ turma.turmadocurso }}</p>
                             </div>
                             <div class="input-field col s12 m12 l3">
                               <p>Nome do Professor:</p>
@@ -95,28 +117,45 @@
                               <p>Parcelas:</p>
                             </div>
                             <div class="input-field col s4 m3 l3 left">
-                              <select name="parcelamento" id="id_parcelamento" onchange="calculaparcelamento()">
-                               <option selected="selected" disabled>Selecione:</option>
-                               {% for i in range %}
-                               <option value="{{ forloop.counter }}">{{ forloop.counter }}x</option>
-                               {% endfor %}
-                              </select>
+                              {% if matricula %}
+                              <p>{{ matricula.parcelamento }}</p>
+                                {% else %}
+                                  <select name="parcelamento" id="id_parcelamento" onchange="()">
+                                   <option selected="selected" disabled>Selecione:</option>
+                                   {% for i in range %}
+                                   <option value="{{ forloop.counter }}">{{ forloop.counter }}x</option>
+                                   {% endfor %}
+                                  </select>
+                                {% endif %}
                             </div>
                             <div class="input-field col s12 m6 l6">
-                              <p>Max de parcelas: {{ parcelas }}</p>
+                              {% if matricula %}
+                                <p>Max de parcelas: {{ turma.turmadocurso.parcelamento }}</p>
+                                {% else %}
+                                  <p>Max de parcelas: {{ parcelas }}</p>
+                                  {% endif %}
+                            </div>
+                            <div class="input-field col s4 m3 l3 left">
+                              {{ form }}
                             </div>
                           </div>
                           <div class="input-field col s12 m12 l12">
                             <div class="input-field col s12">
                               <button class="btn waves-effect waves-light" type="submit" name="action">
-                                <i class="material-icons">lock_open</i>Matricular</button>
+                                {% if matricula %}
+                                  <i class="material-icons">lock_open</i>SALVAR</button>
+                                  {% else %}
+                                    <i class="material-icons">lock_open</i>Matricular</button>
+                                  {% endif %}
                             </div>
-                            <p id="mensagem"></p>
+
                             {% if form.errors %}
+                              <div class="input-field col s12 m12 l12">
                                 <p>NOT VALID</p>
                                 {% for errors in form.errors %}
                                     {{ errors }}
                                 {% endfor %}
+                              </div>
                             {% endif %}
                           </div>
                         </form>

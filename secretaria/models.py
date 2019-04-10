@@ -158,7 +158,7 @@ class Matricula(models.Model):
         ("TRANCADA", "Trancada"),
     )
 
-    status = models.CharField(max_length=10,
+    status = models.CharField('Status', max_length=10,
                               choices=STATUS_CHOICES,  default="AGUARDANDO")
 
     class Meta:

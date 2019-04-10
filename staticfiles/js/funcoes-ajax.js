@@ -35,23 +35,28 @@ function naoutilizouHoraExtra(id){
     });
 }
 
-function calculaparcelamento(){
+function process_response(funcionarios){
+    func_select = document.getElementById('funcionarios');
+    func_select.innerHTML = "";
 
-    token = document.getElementsByName("csrfmiddlewaretoken")[0].value;
-    id = document.getElementsByName("departamentos").value;
+    funcionarios.forEach(function(funcionario){
+        var option = document.createElement("option");
+        option.text = funcionario.fields.nome;
+        func_select.add(option);
+    });
+}
 
-    console.log(id);
+function filtraFuncionarios(){
+    depart_id = document.getElementById('departamentos').value;
     $.ajax({
-        type: 'POST',
-        url: '/vendas/consulta_parcelamento/' + id + '/',
+        type: 'GET',
+        url: '/filtra-funcionarios/',
         data: {
-            csrfmiddlewaretoken: token
+            outro_param: depart_id
         },
         success: function(result){
-            console.log(result);
-            $("#mensagem").text(result.mensagem);
-            $("#horas_atualizadas").text(result.horas);
-
+            process_response(result);
+            $("#mensagem").text('Funcionarios carregados');
         }
     });
 }

@@ -33,7 +33,7 @@ class MatriculaForm(forms.ModelForm):
 class MatriculaFormEditar(forms.ModelForm):
    class Meta:
        model = Matricula
-       fields = ['status','preco','desconto', 'parcelamento', 'totalapagar', 'observacao']
+       fields = ['status']
 
 
 #---------------------------------------------------------------------

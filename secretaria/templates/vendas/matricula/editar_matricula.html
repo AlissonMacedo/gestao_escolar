@@ -1,4 +1,5 @@
-{% extends "core/base.html" %}
+
+
 {% load static %}
 {% block container %}
 {% load my_tags %}
@@ -15,11 +16,12 @@
           <div class="container">
             <div class="row">
               <div class="col s10 m6 l6">
-                <h5 class="breadcrumbs-title">Lista de Matriculas</h5>
+                <h5 class="breadcrumbs-title">Nova Matricula</h5>
                 <ol class="breadcrumbs">
                   <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                   <li><a href="{% url 'secretaria' %}">Secretaria</a></li>
-                  <li class="active">Lista de Matriculas</li>
+                  <li><a href="{% url 'list_matriculas' %}">Matriculas</a></li>
+                  <li class="active">Nova Matricula</li>
                 </ol>
               </div>
               <div class="col s2 m6 l6">
@@ -37,65 +39,58 @@
                   </li>
                 </ul>
               </div>
+              </div>
             </div>
           </div>
         </div>
         <!--breadcrumbs end-->
-        <!--start container-->
-        <div class="container">
-          <div class="section">
-
             <!--Striped Table-->
             <div class="divider"></div>
-            <div id="striped-table">
-              <div class="header-search-wrapper hide-on-med-and-down">
-                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Pesquisar..." />
-              </div>
-              <div class="row">
-                <div class="col s12">
-                  <table class="striped centeredresponsive-table">
-                    <thead>
-                      <tr>
-                        <th data-field="id">Id</th>
-                        <th data-field="nome">Status</th>
-                        <th data-field="price">Aluno</th>
-                        <th data-field="edit">Turma</th>
-                        <th data-field="edit">Editar</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for matricula in matriculas %}
-                        <tr>
-                          <td>{{ matricula.id }}</td>
-                          <td>{{ matricula.status }}</td>
-                          <td>{{ matricula.nomeAluno }}</td>
-                          <td>{{ matricula.turma }}</td>
-                          <td><a class="waves-effect waves-light btn-small" href="{% url 'editar_matricula' matricula.id %}"><i class="material-icons">edit</i></a></td>
-                        </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
+            <!--start container-->
+            <div class="container">
+              <div id="basic-form" class="section">
+                <!-- Inline Form -->
+                <div class="row">
+                  <div class="col s12 m12 l12">
+                    <div class="card-panel center">
+                      <div class="row">
+                        <!-- Idela para editar <input id="your_name" type="text" name="your_name" value="{{ current_name }}"> -->
+
+                            <select name="departamentos" id="departamentos" onchange="filtraFuncionarios()">
+                                <option disabled selected="selected">Selecione um departamento</option>
+                                {% for departamento in departamentos %}
+                                    <option value="{{ departamento.id }}"> {{ departamento.nome }}</option>
+                                {% endfor %}
+                            </select>
+
+                            <select name="funcionarios" id="funcionarios">
+                            </select>
+
+                            <p id="mensagem"></p>
+
+
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-        </div>
-      </section>
-    </div>
+                <!-- Inline form with placeholder -->
+
     <style>
       .fixed-action-btn{
                 margin-bottom: 23px;  //optional
       }
+      .card {
+
+      }
     </style>
+
         <!-- END WRAPPER -->
             <!-- SART BUTTON -->
-    <div class="fixed-action-btn botao">
-        <a href="{% url 'list_alunos_nova_matricula' %}"class="btn-floating btn-large waves-effect waves-light red">
-          <i class="large material-icons">add</i>
-        </a>
-    </div>
-      <!-- END BUTTON -->
+
   </div>
 
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/funcoes-ajax.js' %}"></script>
   <!-- END MAIN -->
   <!-- //////////////////////////////////////////////////////////////////////////// -->
 {% endblock %}
