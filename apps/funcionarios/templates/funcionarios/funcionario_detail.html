@@ -19,12 +19,8 @@
                 <ol class="breadcrumbs">
                   <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                   <li><a href="{% url 'administrativo' %}">Administativo</a></li>
-                  <li><a href="{% url 'list_funcionarios' %}">Funcionario</a></li>
-                  {% if funcionario %}
-                    <li class="active">Editar um Funcionario</li>
-                    {% else %}
-                      <li class="active">Novo Funcionario</li>
-                    {% endif %}
+                  <li><a href="{% url 'list_departamentos' %}">Funcionario</a></li>
+                  <li class="active">Detalhes de Funcionario</li>
                 </ol>
               </div>
               <div class="col s2 m6 l6">
@@ -57,77 +53,53 @@
                 <div class="row">
                   <div class="col s12 m12 l12">
                     <div class="card-panel">
-                      {% if funcionario %}
-                        <h4 class="header2">Editar um novo Funcionario</h4>
-                        {% else %}
-                          <h4 class="header2">Cadastrar um novo Funcionario</h4>
-                        {% endif %}
+                      <h4 class="header2">Cadastrar um novo Funcionario</h4>
                       <div class="row">
-                        <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                        <form class="col s12">
                           <div class="row">
                             <div class="input-field col s12 m6 l6">
-                              <input class='validate' type='text' name='nome' id='id_nome' maxlength="18" value='{{ object.nome }}'/>
+                              <input disabled class='validate' type='text' name='nome' id='id_nome' maxlength="18" value='{{ object.nome }}'/>
                               <label for="nome">Primeiro Nome</label>
                             </div>
                             <div class="input-field col s12 m6 l6">
-                              <input class='validate' type='text' name='segundonome' id='id_segundonome' maxlength="18" value='{{ object.segundonome }}'/>
+                              <input disabled class='validate' type='text' name='segundonome' id='id_segundonome' maxlength="18" value='{{ object.segundonome }}'/>
                               <label for="segundonome">Segundo Nome</label>
                             </div>
                             <div class="input-field col s12 m6 l6">
-                              <input class='validate' type='number' name='telefone' id='id_telefone' maxlength="12" value="{{ object.telefone }}"/>
+                              <input disabled class='validate' type='number' name='telefone' id='id_telefone' maxlength="12" value="{{ object.telefone }}"/>
                               <label for="id_telefone">Telefone</label>
                             </div>
                             <div class="input-field col s12 m6 l6">
-                              {{ form.departamento}}
+                              <input disabled class='validate' type='text' name='departamento' id='id_departamento' maxlength="12" value="{{ funcionario.departamento }}"/>
                               <label for="id_departamento">Departamento</label>
                             </div>
                             <div class="input-field inline col s12 m6 l6">
-                              <input id="id_email" type="email" class="validate" name="email" maxlength="70" value="{{ object.email }}">
+                              <input disabled id="id_email" type="email" class="validate" name="email" maxlength="70" value="{{ object.email }}">
                               <label for="email_inline">Email</label>
                             </div>
                             <div class="input-field col s12 m6 l6">
-                              Atualmente: <a href="{{ user.funcionario.imagem.url }}">foto-funcionario/avatar-13_m4DbLsd.png</a><br>
-                              Modificar: <input type="file" name="imagem" accept="image/*" id="id_imagem">
+                              Atualmente: <a disabled href="{{ user.funcionario.imagem.url }}">Imagem perfil...</a><br>
                             </div>
                             </div>
                             <div class="input-field inline col s12 m6 l6">
-                              <input id="id_aniversario" type="date" class="validate" name="aniversario" maxlength="8" value="{{ object.aniversario|date:"Y-m-d" }}">
+                              <input disabled id="id_aniversario" type="date" class="validate" name="aniversario" maxlength="8" value="{{ object.aniversario|date:"Y-m-d" }}">
                             </div>
                             <div class="input-field inline col s12 m6 l6">
-                              <input id="id_regiao" type="text" class="validate" name="regiao" maxlength="18" value="{{ object.regiao }}">
+                              <input disabled id="id_regiao" type="text" class="validate" name="regiao" maxlength="18" value="{{ object.regiao }}">
                               <label for="regiao_inline">Região</label>
                             </div>
                           </div>
                           </div>
                           <div class='row'>
-                            {% if funcionario %}
-                              <div class="fixed-action-btn">
-                                <a class="btn-floating btn-large red">
-                                  <i class="large material-icons">menu</i>
+                            <div class="fixed-action-btn botao">
+                                <a href="{% url 'editar_funcionario' funcionario.id %}"class="btn-floating btn-large waves-effect waves-light blue">
+                                  <i class="large material-icons">edit</i>
                                 </a>
-                                <ul>
-                                  <li><a class="btn-floating yellow darken-1"><i class="material-icons">local_printshop</i></a></li>
-                                  <li><a href="{% url 'deletar_funcionario' funcionario.id %}" class="btn-floating green"><i class="material-icons">delete_forever</i></a></li>
-                                  <li><button type='submit' name='btn_login' class="btn-floating waves-effect waves-light blue"><i class="material-icons">save</i></button></li>
-                                </ul>
-                              </div>
-                            {% else %}
-                              <div class="fixed-action-btn botao">
-                                <button type='submit' name='btn_login' class="btn-floating btn-large waves-effect waves-light blue"><i class="large material-icons">save</i></button>
-                              </div>
-                            {% endif %}
+                            </div>
                           </div>
                       </form>
                       </div>
                     </div>
-                    {% if form.errors %}
-                      <div class="input-field col s12 m12 l12">
-                        <p>NOT VALID</p>
-                        {% for errors in form.errors %}
-                            {{ errors }}
-                        {% endfor %}
-                      </div>
-                    {% endif %}
                   </div>
                 </div>
                 <!--END Form-->
@@ -141,8 +113,4 @@
 
   }
 </style>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-
 {% endblock %}

@@ -232,21 +232,15 @@
                       <span class="nav-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="bold">
-                  <a href="cards-basic.html" class="waves-effect waves-cyan">
-                      <i class="material-icons">cast</i>
-                      <span class="nav-text">Cards</span>
-                    </a>
-                </li>
                 <!-- SUBMENU ADMINISTRATIVO -->
                 <ul class="collapsible collapsible-accordion">
                   <li>
-                    <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>ADMINISTRATIVO<i class="material-icons right" style="margin-right:0;"></i></a>
+                    <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">store</i>ADMINISTRATIVO<i class="material-icons right" style="margin-right:0;"></i></a>
                     <div class="collapsible-body">
                   <ul>
-                    <li><a href="{% url 'list_funcionarios' %}" class="waves-effect waves-blue" ><i class="material-icons">swap_horiz</i>Funcionarios</a></li>
-                    <li><a href="{% url 'list_departamentos' %}" class="waves-effect waves-blue"><i class="material-icons">label_outline</i>Departamentos</a></li>
-                    <li><a class="waves-effect waves-blue"><i class="material-icons">swap_horiz</i>Empresa</a></li>
+                    <li><a href="{% url 'list_funcionarios' %}" class="waves-effect waves-blue" ><i class="material-icons">person_pin</i>Funcionarios</a></li>
+                    <li><a href="{% url 'list_departamentos' %}" class="waves-effect waves-blue"><i class="material-icons">view_comfy</i>Departamentos</a></li>
+                    <li><a class="waves-effect waves-blue"><i class="material-icons">account_balance</i>Empresa</a></li>
                     <li><div class="divider"></div></li>
                   </ul>
                 </ul>
@@ -256,14 +250,14 @@
               <!-- SUBMENU SECRETARIA -->
               <ul class="collapsible collapsible-accordion">
                 <li>
-                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>SECRETARIA<i class="material-icons right" style="margin-right:0;"></i></a>
+                  <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">today</i>SECRETARIA<i class="material-icons right" style="margin-right:0;"></i></a>
                   <div class="collapsible-body">
                 <ul>
-                  <li><a href="{% url 'list_alunos' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">fullscreen</i>Alunos</a></li>
+                  <li><a href="{% url 'list_alunos' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">person_pin</i>Alunos</a></li>
                   <li><a href="{% url 'list_matriculas' %}"  class="waves-effect waves-blue"><i class="material-icons">pageview</i>Matriculas</a></li>
-                  <li><a href="{% url 'list_categorias' %}"class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Categorias</a></li>
-                  <li><a href="{% url 'list_professores' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">perm_identity</i>Professores</a></li>
-                  <li><a href="{% url 'list_turmas' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">rowing</i>Turmas</a></li>
+                  <li><a href="{% url 'list_categorias' %}"class="waves-effect waves-blue" href="#"><i class="material-icons">dns</i>Categorias</a></li>
+                  <li><a href="{% url 'list_professores' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">face</i>Professores</a></li>
+                  <li><a href="{% url 'list_turmas' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">group</i>Turmas</a></li>
                   <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">work</i>Salas</a></li>
 
                   <li><div class="divider"></div></li>
@@ -273,58 +267,28 @@
             <!-- SUBMENU VENDAS -->
             <ul class="collapsible collapsible-accordion">
               <li>
-                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>VENDAS<i class="material-icons right" style="margin-right:0;"></i></a>
+                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">attach_money</i>VENDAS<i class="material-icons right" style="margin-right:0;"></i></a>
                 <div class="collapsible-body">
               <ul>
                 <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Matriculas</a></li>
                 <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Interessados</a></li>
                 <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Cursos</a></li>
-
                 <li><div class="divider"></div></li>
               </ul>
             </ul>
           <!-- FIM DO SUBMENU VENDAS-->
-                <li class="bold">
-                  <a href="ui-basic-buttons.html" class="waves-effect waves-cyan">
-                      <i class="material-icons">insert_link</i>
-                      <span class="nav-text">Buttons</span>
-                    </a>
-                </li>
-                <li class="bold">
-                  <a href="form-layouts.html" class="waves-effect waves-cyan">
-                      <i class="material-icons">format_color_text</i>
-                      <span class="nav-text">Forms</span>
-                    </a>
-                </li>
-                <li class="bold">
-                  <a href="css-typography.html" class="waves-effect waves-cyan">
-                      <i class="material-icons">format_size</i>
-                      <span class="nav-text">Typography</span>
-                    </a>
-                </li>
-                <li class="bold">
-                  <a href="css-color.html" class="waves-effect waves-cyan">
-                      <i class="material-icons">invert_colors</i>
-                      <span class="nav-text">Color</span>
-                    </a>
-                </li>
-                <li class="bold">
-                  <a href="table-basic.html" class="waves-effect waves-cyan">
-                      <i class="material-icons">border_all</i>
-                      <span class="nav-text">Table</span>
-                    </a>
-                </li>
-                <li class="bold">
-                  <a href="ui-icons.html" class="waves-effect waves-cyan">
-                    <i class="material-icons">lightbulb_outline</i>
-                    <span class="nav-text">Icons</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="btn waves-effect waves-light gradient-45deg-red-pink" href="https://pixinvent.com/materialize-material-design-admin-template/landing/" target="_blank">
-                    <i class="material-icons white-text">file_upload</i>Upgrade to Pro!
-                  </a>
-                </li>
+          <!-- SUBMENU EVENTOS -->
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">domain</i>EVENTOS<i class="material-icons right" style="margin-right:0;"></i></a>
+                <div class="collapsible-body">
+              <ul>
+                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">dehaze</i>Listar Eventos</a></li>
+                <li><div class="divider"></div></li>
+              </ul>
+            </ul>
+          <!-- FIM DO SUBMENU EVENTOS-->
+
               </ul>
             </li>
           </ul>

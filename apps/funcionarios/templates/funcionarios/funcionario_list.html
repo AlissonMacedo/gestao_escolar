@@ -59,6 +59,7 @@
                         <th data-field="id">Id</th>
                         <th data-field="nome">Nome</th>
                         <th data-field="price">Departamento</th>
+                        <th data-field="edit">Detalhes</th>
                         <th data-field="edit">Editar</th>
                       </tr>
                     </thead>
@@ -68,7 +69,8 @@
                           <td>{{ funcionario.id }}</td>
                           <td>{{ funcionario }}</td>
                           <td>{{ funcionario.departamento }}</td>
-                          <td><a class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
+                          <td><a href="{% url 'detalhes_funcionario' funcionario.id %}" class="waves-effect waves-light btn-small"><i class="material-icons">camera_rear</i></a></td>
+                          <td><a href="{% url 'editar_funcionario' funcionario.id %}" class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
                         </tr>
                       {% endfor %}
                     </tbody>
@@ -81,13 +83,13 @@
     </div>
     <style>
       .fixed-action-btn{
-                margin-bottom: 18px;  //optional
+                margin-bottom: 23px;  //optional
       }
     </style>
         <!-- END WRAPPER -->
             <!-- SART BUTTON -->
     <div class="fixed-action-btn botao">
-        <a class="btn-floating btn-large waves-effect waves-light red">
+        <a href="{% url 'novo_funcionario' %}"class="btn-floating btn-large waves-effect waves-light red">
           <i class="large material-icons">add</i>
         </a>
     </div>

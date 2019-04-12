@@ -4,14 +4,15 @@ from django.views.generic import (
         ListView,
         UpdateView,
         DeleteView,
-        CreateView
+        CreateView,
+        DetailView
         )
 from django.views import View
 from .models import Funcionario
 import io
 from django.http import FileResponse
 from reportlab.pdfgen import canvas
-
+from .forms import FuncionarioForm
 from django.http import HttpResponse
 from django.template.loader import get_template
 import xhtml2pdf.pisa as pisa
@@ -25,9 +26,13 @@ class FuncionariosList(ListView):
         return Funcionario.objects.filter(empresa=empresa_logada)
 
 
+class FuncionarioDetail(DetailView):
+    model = Funcionario
+
+
 class FuncionarioEdit(UpdateView):
     model = Funcionario
-    fields = ['nome', 'departamento']
+    form_class = FuncionarioForm
 
 
 class FuncionarioDelete(DeleteView):
@@ -37,14 +42,16 @@ class FuncionarioDelete(DeleteView):
 
 class FuncionarioNovo(CreateView):
     model = Funcionario
-    fields = ['nome', 'departamento']
+    form_class = FuncionarioForm
 
     def form_valid(self, form):
         funcionario = form.save(commit=False)
-        username = funcionario.nome.split(' ')[0] + funcionario.nome.split(' ')[1]
+        #username = funcionario.nome.split(' ')[0] + funcionario.nome.split(' ')[1]
+        username = funcionario.nome +funcionario.segundonome
         funcionario.empresa = self.request.user.funcionario.empresa
         funcionario.user = User.objects.create(username=username)
         funcionario.save()
+        print(funcionario.aniversario)
         return super(FuncionarioNovo, self).form_valid(form)
 
 
