@@ -1,0 +1,125 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block container %}
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+      <!-- START CONTENT -->
+      <section id="content">
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+          <!-- Search for small screen -->
+          <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+            <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title">Administrativo</h5>
+                <ol class="breadcrumbs">
+                  <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="{% url 'dashboard' %}">Financeiro</a></li>
+                  <li class="active">Administrativo</li>
+                </ol>
+              </div>
+              <div class="col s2 m6 l6">
+                <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+                    <i class="material-icons hide-on-med-and-up">settings</i>
+                    <span class="hide-on-small-onl">Settings</span>
+                    <i class="material-icons right">arrow_drop_down</i>
+                  </a>
+                <ul id="dropdown1" class="dropdown-content">
+                  <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+                  </li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
+
+            <!--Striped Table-->
+            <div class="divider"></div>
+            <!--start container-->
+
+            <div class="container">
+              <div class="section">
+                <div class="container">
+                  <div class="row">
+                    <div class="col s12 m3">
+                      <a href="{% url 'list_menu_pagamentos_alunos' %}">
+                      <div class="card hoverable" >
+                        <div class="card-image">
+                          <img src="{% static 'home/images/gallary/29.png'%}"></a>
+                          <div class="card-content">
+                          <a href="{% url 'list_menu_pagamentos_alunos' %}"><p>Exibir Alunos</p></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12 m3">
+                      <a href="{% url 'list_mensalidades_status' id=5 %}">
+                      <div class="card hoverable" >
+                        <div class="card-image">
+                          <img src="{% static 'home/images/gallary/30.png'%}"></a>
+                          <div class="card-content">
+                          <a href="{% url 'list_mensalidades_status' id=5 %}"><p>Pagamentos ABERTOS</p></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12 m3">
+                      <a href="{% url 'list_mensalidades_status' id=5 %}">
+                      <div class="card hoverable" >
+                        <div class="card-image">
+                          <img src="{% static 'home/images/gallary/30.png'%}"></a>
+                          <div class="card-content">
+                          <a href="{% url 'list_mensalidades_status' id=5 %}"><p>Pagamentos PAGO</p></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col s12 m3">
+                      <a href="{% url 'list_mensalidades_status' id=2 %}">
+                      <div class="card hoverable" >
+                        <div class="card-image">
+                          <img src="{% static 'home/images/gallary/32.png'%}"></a>
+                          <div class="card-content">
+                          <a href="{% url 'list_mensalidades_status' id=2 %}"><p>Pagamentos ATRAZO</p></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+              </div>
+            </div>
+
+<!--
+    <style>
+      .fixed-action-btn{
+                margin-bottom: 18px;  //optional
+      }
+      .card {
+
+      }
+    </style>
+  -->
+        <!-- END WRAPPER -->
+            <!-- SART BUTTON -->
+    <!--<div class="fixed-action-btn botao">
+        <a class="btn-floating btn-large waves-effect waves-light red">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
+      <!-- END BUTTON -->
+  </div>
+
+  <!-- END MAIN -->
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+{% endblock %}

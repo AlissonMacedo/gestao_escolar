@@ -1,0 +1,124 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block container %}
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+      <!-- START CONTENT -->
+      <section id="content">
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+          <!-- Search for small screen -->
+          <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+            <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title">Lista de Alunos</h5>
+                <ol class="breadcrumbs">
+                  <li><a href="index.html">Dashboard</a></li>
+                  <li><a href="#">Secretaria</a></li>
+                  <li class="active">Lista de Alunos</li>
+                </ol>
+              </div>
+              <div class="col s2 m6 l6">
+                <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+                    <i class="material-icons hide-on-med-and-up">settings</i>
+                    <span class="hide-on-small-onl">Settings</span>
+                    <i class="material-icons right">arrow_drop_down</i>
+                  </a>
+                <ul id="dropdown1" class="dropdown-content">
+                  <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+                  </li>
+                  <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumb  s end-->
+        <!--start container-->
+        <div class="container">
+          <div class="section">
+
+            <!--Striped Table-->
+            <div class="divider"></div>
+            <div id="striped-table">
+              <div class="header-search-wrapper hide-on-med-and-down">
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Pesquisar..." />
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <table class="striped centeredresponsive-table">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Nome do Aluno</th>
+                        <th>Curso Matriculado</th>
+                        <th>Emitido Boleto</th>
+                        <th class="hidden-xs">Detalhes</th>
+                        <th class="hidden-xs">Editar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        {% for Matricula in matriculasaverificarABERTO %}
+                        <td>
+                            <a>{{ Matricula.id }}</a>
+                        </td>
+                        <td>
+                            <a>{{ Matricula.nomeAluno }}</a>
+                        </td>
+                        <td>
+                            <a>{{ Matricula.turma.turmadocurso }}</a>
+                        </td>
+
+                        <td>
+                            {% if Matricula.emitidosBoletos is True %}
+                              <a>Sim</a>
+                              {% else %}
+                                <a>Não</a>
+                              {% endif %}
+                        </td>
+                        <td>
+                            <a href="{% url 'detail_matriculaaverificar_financeiro' Aluno.id %}"
+                            class="waves-effect waves-light btn-small"><i class="material-icons">format_list_bulleted</i></a>
+                        </td>
+
+                        <td class="hidden-xs">
+                            <a href="{% url 'editar_matriculaaverificar_financeiro' Aluno.id %}"
+                            class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+    </div>
+    <style>
+      .fixed-action-btn{
+                margin-bottom: 18px;  //optional
+      }
+    </style>
+        <!-- END WRAPPER -->
+            <!-- SART BUTTON -->
+    <div class="fixed-action-btn botao">
+        <a class="btn-floating btn-large waves-effect waves-light red">
+          <i class="large material-icons">add</i>
+        </a>
+    </div>
+      <!-- END BUTTON -->
+  </div>
+
+  <!-- END MAIN -->
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+{% endblock %}

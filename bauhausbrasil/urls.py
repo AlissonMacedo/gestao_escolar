@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^', include('apps.home.urls')),
     path('tecnologiadainformacao/', include('apps.tecnologiadainformacao.urls')),
     path('categoria/', include('apps.categoriacursos.urls')),
+    path('financeiro/', include('apps.financeiro.urls')),
     path('professores/', include('apps.professores.urls')),
     path('alunos/', include('apps.aluno.urls')),
     path('funcionarios/', include('apps.funcionarios.urls')),

@@ -1,5 +1,6 @@
 .idea
 *.sqlite3
+db.sqlite3-6
 venv
 *.pyc
 bauhausbrasil/__pycache__/

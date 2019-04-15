@@ -6,6 +6,7 @@ from .views import (
         DepartamentoDelete
 )
 
+
 #---- URLs Core -------------------------------------------------------------
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
             name='update_departamento'),
     path('deletar/<int:pk>/', DepartamentoDelete.as_view(),
             name='delete_departamento'),
+
 ]

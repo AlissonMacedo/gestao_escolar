@@ -264,10 +264,23 @@
                 </ul>
               </ul>
             <!-- FIM DO SUBMENU SECRETARIA-->
+            <!-- SUBMENU Financeiro -->
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">attach_money</i>Financeiro<i class="material-icons right" style="margin-right:0;"></i></a>
+                <div class="collapsible-body">
+              <ul>
+                <li><a href="{% url 'list_alunos' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">person_pin</i>Alunos</a></li>
+                <li><a href="{% url 'list_matriculas' %}"  class="waves-effect waves-blue"><i class="material-icons">pageview</i>Matriculas</a></li>
+                <li><a href="{% url 'list_menu_pagamentos' %}"class="waves-effect waves-blue"><i class="material-icons">monetization_on</i>Pagamentos</a></li>
+                <li><div class="divider"></div></li>
+              </ul>
+            </ul>
+          <!-- FIM DO SUBMENU SECRETARIA-->
             <!-- SUBMENU VENDAS -->
             <ul class="collapsible collapsible-accordion">
               <li>
-                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">attach_money</i>VENDAS<i class="material-icons right" style="margin-right:0;"></i></a>
+                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">show_chart</i>VENDAS<i class="material-icons right" style="margin-right:0;"></i></a>
                 <div class="collapsible-body">
               <ul>
                 <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Matriculas</a></li>

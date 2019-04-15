@@ -21,6 +21,8 @@ from django.views.generic import (
 from .forms import CursoForm, SalaForm, MatriculaForm, MatriculaFormEditar, TurmaForm
 from .models import Brand, Car
 from apps.departamentos.models import Departamento
+from apps.financeiro.views import defmensalidades
+from apps.financeiro.models import Mensalidades, Status_mensalidades
 from django.core import serializers
 from django.http import HttpResponse
 
@@ -187,8 +189,17 @@ def novo_matricula(request, idaluno, idturma):
         novamatricula.varlorparcelas = novamatricula.totalapagar / novamatricula.parcelamento
         novamatricula.empresa = request.user.funcionario.empresa
         novamatricula.save()
+        matricula = Matricula.objects.latest('id')
+        status_mensalidades = Status_mensalidades.objects.get(id=3)
 
-        return redirect('list_matriculas')
+
+        defmensalidades(matriculaid=matricula, nomeAluno=aluno,
+            turma=turma, totalapagar=novamatricula.totalapagar,
+            parcelamento=novamatricula.parcelamento, preco=novamatricula.preco,
+            empresa=novamatricula.empresa, status_mensalidades=status_mensalidades)
+
+        return redirect('list_matriculas') # listar estatus geral da matricula com as parcelas
+
 
     return render(request, 'vendas/matricula/novo_matricula.html',
         {'form': form, 'aluno': aluno, 'turma': turma, 'range':range(0,parcelas), 'parcelas':parcelas})
