@@ -6,10 +6,14 @@ from django.urls import path
 from django.urls import include, path
 from rest_framework import routers
 from apps.core import views
+from apps.funcionarios.api.views import FuncionarioViewSet
+from apps.registro_hora_extra.api.views import RegistroHoraExtraViewSet
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'api/users', views.UserViewSet)
+router.register(r'groups/groups', views.GroupViewSet)
+router.register(r'api/funcionarios', FuncionarioViewSet)
+router.register(r'api/horaextra', RegistroHoraExtraViewSet)
 
 
 

@@ -5,6 +5,7 @@ from django.contrib.auth import logout
 from apps.funcionarios.models import Funcionario
 from secretaria.models import Turma
 from django.views import View
+#---- serializers ----
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
