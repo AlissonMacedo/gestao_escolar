@@ -113,6 +113,7 @@ class Turma(models.Model):
         aulas = aulas / 7
         return round(aulas)
 
+    @property
     def date_diff2(self):
         hoje = timezone.now()
         tempocorrido = (hoje - self.datainicio).days
@@ -148,6 +149,8 @@ class Matricula(models.Model):
     empresa = models.ForeignKey(
         Empresa, on_delete=models.PROTECT, null=True, blank=True)
     observacao = models.TextField('Observação', null=True, blank=True)
+    status_coordenacao = models.BooleanField('Status Coordenaç',default=False)
+    status_financeiro = models.BooleanField(default=False)
 
     #models.DecimalField(
         #'Total a Pagar', decimal_places=2, max_digits=10)

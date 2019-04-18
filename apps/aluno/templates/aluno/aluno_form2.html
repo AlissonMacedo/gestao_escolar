@@ -1,0 +1,58 @@
+{% extends "core/base.html" %}
+{% load bootstrap %}
+{% block container %}
+
+<div class="col-md-8">
+  <div class="panel panel-warning">
+    <div class="panel-heading text-center">
+      <h3 class="panel-title">Cadastrar um novo aluno</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <form class="col s12" method="post" enctype="multipart/form-data">{% csrf_token %}
+              <div class="form-caduser">
+                {{ form|bootstrap }}
+              </div>
+              <div>
+              <br>
+                {% if object.id > 0 %}
+                <div class="well well-lg">
+                  <h4><b>Documentos</b></h4>
+                  {% for documentoaluno in object.documentoaluno_set.all %}
+                  <li>
+                    <a href="{{ documentoaluno.arquivo.url }}"> {{ documentoaluno }}</a><br>
+                  </li>
+                  {% endfor %}
+                </div>
+                {% endif %}
+
+
+          </tr>
+        </tbody>
+      </table>
+      <!--
+      <div>
+      <img src="{{ aluno.foto.url }}" height="200" border="1"/>
+      <br>
+      <img src="{{ aluno.fotodocumento.url }}" height="200" border="1"/>
+      <br>
+      </div>
+      -->
+      <div class=" ">
+        <button class='btn btn-xs btn-warning' type="submit">Salvar Cadastro</button>
+        {% if object.id > 0 %}
+          <a href="{% url 'deletar_aluno' aluno.id %}"
+                class="btn btn-xs btn-danger">Deletar Aluno!</a>
+          <a href="{% url 'create_documento_aluno' object.id %}"
+                class="btn btn-xs btn-info">Anexar Documento</a>
+        {% endif %}
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

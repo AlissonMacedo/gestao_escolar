@@ -35,7 +35,6 @@ class MatriculaFormEditar(forms.ModelForm):
        model = Matricula
        fields = ['status']
 
-
 #---------------------------------------------------------------------
 
 #data formatada no model

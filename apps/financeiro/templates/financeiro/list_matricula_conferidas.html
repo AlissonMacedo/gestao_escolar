@@ -15,11 +15,11 @@
           <div class="container">
             <div class="row">
               <div class="col s10 m6 l6">
-                <h5 class="breadcrumbs-title">Lista de Alunos</h5>
+                <h5 class="breadcrumbs-title">Lista de Matriculas Conferidas</h5>
                 <ol class="breadcrumbs">
-                  <li><a href="index.html">Dashboard</a></li>
-                  <li><a href="#">Secretaria</a></li>
-                  <li class="active">Lista de Alunos</li>
+                  <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="{% url 'coordenacao' %}">Coordenação</a></li>
+                  <li class="active">Lista de Matriculas</li>
                 </ol>
               </div>
               <div class="col s2 m6 l6">
@@ -57,22 +57,20 @@
                     <thead>
                       <tr>
                         <th data-field="id">Id</th>
-                        <th data-field="nome">Nome</th>
-                        <th data-field="price">Idade</th>
-                        <th data-field="price">Nascimento</th>
-                        <th data-field="price">Responsavel</th>
-                        <th data-field="edit">Editar</th>
+                        <th data-field="nome">Status</th>
+                        <th data-field="price">Aluno</th>
+                        <th data-field="edit">Turma</th>
+                        <th data-field="edit">Conferir</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for aluno in object_list %}
+                      {% for matricula in matriculas %}
                         <tr>
-                          <td>{{ aluno.id }}</td>
-                          <td>{{ aluno }}</td>
-                          <td>{{ aluno.idade }}</td>
-                          <td>{{ aluno.datadenascimento|date:"d/m/y" }}</td>
-                          <td>{{ aluno.responsavel }}</td>
-                          <td><a href="{% url 'editar_aluno' aluno.id %}" class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
+                          <td>{{ matricula.id }}</td>
+                          <td>{{ matricula.status }}</td>
+                          <td>{{ matricula.nomeAluno }}</td>
+                          <td>{{ matricula.turma }}</td>
+                          <td><a class="waves-effect waves-light btn-small" href="{% url 'editar_matricula_financeiro' matricula.id %}"><i class="material-icons">verified_user</i></a></td>
                         </tr>
                       {% endfor %}
                     </tbody>
@@ -85,17 +83,11 @@
     </div>
     <style>
       .fixed-action-btn{
-                margin-bottom: 18px;  //optional
+                margin-bottom: 23px;  //optional
       }
     </style>
         <!-- END WRAPPER -->
-            <!-- SART BUTTON -->
-    <div class="fixed-action-btn botao">
-        <a href="{% url 'novo_aluno' %}"class="btn-floating btn-large waves-effect waves-light red">
-          <i class="large material-icons">add</i>
-        </a>
-    </div>
-      <!-- END BUTTON -->
+
   </div>
 
   <!-- END MAIN -->

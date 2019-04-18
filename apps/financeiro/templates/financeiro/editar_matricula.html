@@ -1,0 +1,153 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+{% block container %}
+<section id="content">
+  <!--breadcrumbs start-->
+  <div id="breadcrumbs-wrapper">
+    <!-- Search for small screen -->
+    <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+      <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col s10 m6 l6">
+          <h5 class="breadcrumbs-title">Editar Matricula</h5>
+          <ol class="breadcrumbs">
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'administrativo' %}">Coordenação</a></li>
+            <li><a href="{% url 'list_departamentos' %}">Matriculas</a></li>
+            <li class="active">Editar Matricula</li>
+          </ol>
+        </div>
+        <div class="col s2 m6 l6">
+          <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+              <i class="material-icons hide-on-med-and-up">settings</i>
+              <span class="hide-on-small-onl">Settings</span>
+              <i class="material-icons right">arrow_drop_down</i>
+            </a>
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+            </li>
+            <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+            </li>
+            <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--breadcrumbs end-->
+
+      <!--Striped Table-->
+      <div class="divider"></div>
+      <!--start container-->
+      <div class="container">
+        <!--Basic Form-->
+        <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="card-panel">
+                <h4 class="header2">Editar uma Matricula</h4>
+                <div class="row">
+                  <form class="col s12">
+                    <div class="row">
+                      <div class="input-field col s12 m6 l6">
+                        <input disabled class='validate' type='text' name='nomeAluno.primeironome' id='id_nomeAluno.primeironome' maxlength="" value='{{ matricula.nomeAluno.primeironome }}'/>
+                        <label for="nome">Primeiro nome</label>
+                      </div>
+                      <div class="input-field col s12 m6 l6">
+                        <input disabled class='validate' type='text' name='nomeAluno.segundonome' id='id_nomeAluno.segundonome' maxlength="" value='{{ matricula.nomeAluno.segundonome }}'/>
+                        <label for="segundonome">Segundo Nome</label>
+                      </div>
+                      <div class="input-field col s12 m3 l3">
+                        <input disabled class='validate' type='number' name='id_telefone' id='id_nomeAluno.telefone' maxlength="12" value="{{ matricula.nomeAluno.telefone }}"/>
+                        <label for="id_telefone">Telefone</label>
+                      </div>
+                      <div class="input-field col s12 m1 l1">
+                        <input disabled class='validate' type='text' name='id' id='id_nomeAluno.id' maxlength="2" value="{{ matricula.nomeAluno.id }}"/>
+                        <label for="id">ID</label>
+                      </div>
+                      <div class="input-field inline col s12 m2 l2">
+                        <input disabled id="id_email" type="email" class="validate" name="email" maxlength="70" value="{{ matricula.nomeAluno.idade }}">
+                        <label for="email_inline">Idade</label>
+                      </div>
+                      <div class="input-field col s12 m3 l3">
+                        <input disabled class='validate' type='text' name='id' id='id_nomeAluno.id' maxlength="2" value="{{ matricula.nomeAluno.cpf }}"/>
+                        <label for="id">CPF</label>
+                      </div>
+                      <div class="input-field inline col s12 m3 l3">
+                        <input disabled id="id_email" type="email" class="validate" name="email" maxlength="70" value="{{ matricula.nomeAluno.rg }}">
+                        <label for="email_inline">RG</label>
+                      </div>
+                    </div>
+                      <div class="input-field inline col s12 m2 l2">
+                          <input disabled id="id_aniversario" type="date" class="validate" name="aniversario" maxlength="8" value="{{ matricula.nomeAluno.datadenascimento|date:"Y-m-d" }}">
+                      </div>
+                      <div class="input-field inline col s12 m4 l4">
+                        <input disabled id="id_regiao" type="text" class="validate" name="regiao" maxlength="18" value="{{ matricula.nomeAluno.responsavel }}">
+                        <label for="regiao_inline">Responsavel</label>
+                      </div>
+                      <div class="col s12 m6 l6">
+                        <a>Foto do Aluno:</a>
+                        <div class="chip col s12 m12 l12">
+                          <img src="{{ user.funcionario.imagem.url }}" alt="Contact Person">
+                          {{ user.funcionario.imagem.url }}<!--Colocar img Aluno -->
+                        </div>
+                      </div>
+                      <div class="input-field col s12 m12 l12">
+                          <div class="input-field col s12 m6 l6">
+                            {{ form.status }}
+                          </div>
+                          <div class="input-field col s12 m6 l6">
+                            {{ form.observacao }}
+                          </div>
+                      </div>
+                      <div class="input-field col s12 m6 l6">
+                          <a>Documentos:</a><br>
+                          {{ user.funcionario.imagem.url }} <br><!--Colocar img Aluno -->
+                          {{ user.funcionario.imagem.url }} <br>
+                      </div>
+                      <div class="col s12 m6 l6">
+                        <input type="checkbox" id=""  name="status_financeiro" value={{ form.status_coordenacao }}
+                          <label for="">Status Coordenação</label><br>
+                        <input type="checkbox" id="task1"  name="status_financeiro" value={{ form.status_financeiro }}
+                          <label for="task1">Status Financeiro</label>
+                      </div>
+                      <div class="fixed-action-btn botao">
+                        <button type='submit' name='btn_login' class="btn-floating btn-large waves-effect waves-light blue"><i class="large material-icons">save</i></button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% if form.errors %}
+              <div class="input-field col s12 m12 l12">
+                <p>NOT VALID</p>
+                {% for errors in form.errors %}
+                    {{ errors }}
+                {% endfor %}
+              </div>
+              {% endif %}
+          </div>
+        </div>
+<!--END Form-->
+      </div>
+
+<style>
+.fixed-action-btn{
+margin-bottom: 23px;  //optional
+}
+.card {
+
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+{% endblock %}

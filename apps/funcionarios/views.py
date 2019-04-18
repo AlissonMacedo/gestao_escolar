@@ -51,7 +51,7 @@ class FuncionarioNovo(CreateView):
         funcionario.empresa = self.request.user.funcionario.empresa
         funcionario.user = User.objects.create(username=username)
         funcionario.save()
-        print(funcionario.aniversario)
+        #print(funcionario.aniversario)
         return super(FuncionarioNovo, self).form_valid(form)
 
 

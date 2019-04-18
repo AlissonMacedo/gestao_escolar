@@ -15,10 +15,11 @@ class Aluno(models.Model):
     RG = models.IntegerField('RG', null=True, blank=True)
     datadenascimento = models.DateTimeField('Data Nascimento')
     responsavel = models.CharField('Responsavel', max_length=30)
+    telefone = models.IntegerField('Telefone', null=True, blank=True)
     empresa = models.ForeignKey(Empresa, on_delete=models.PROTECT, null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('list_aluno')
+        return reverse('list_alunos')
 
     class Meta:
         verbose_name = 'Aluno'
@@ -27,6 +28,3 @@ class Aluno(models.Model):
 
     def __str__(self):
         return self.primeironome + ' ' + self.segundonome
-
-
-

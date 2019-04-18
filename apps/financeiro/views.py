@@ -14,9 +14,48 @@ from django.views.generic import (
 )
 
 from secretaria.models import Matricula
-from .forms import MatriculaFormEditarFinanceiro
+from .forms import MatriculaFormEditarFinanceiro, MatriculaConferirFormEditar
 from .models import Status_mensalidades, Mensalidades
+from apps.aluno.models import Aluno
 
+
+
+#----------- Cona Matriculas  -------------------------------
+
+def list_matriculas_financeiro_conferir(request):
+    matriculas = Matricula.objects.filter(status_financeiro=False)
+    return render(request, 'financeiro/list_matricula_conferir.html', {'matriculas': matriculas})
+
+
+def list_matriculas_financeiro_conferidas(request):
+    matriculas = Matricula.objects.filter(status_financeiro=True)
+    return render(request, 'financeiro/list_matricula_conferidas.html', {'matriculas': matriculas})
+
+#----------- Editar Matriculas a Liberar e Liberadas -------------------------------
+
+def editar_matricula_financeiro(request, id):
+    matricula = Matricula.objects.get(id=id)
+    empresa_logada = request.user.funcionario.empresa
+    aluno = matricula.nomeAluno
+    turma = matricula.turma
+
+
+    form = MatriculaConferirFormEditar(request.POST or None,
+                               request.FILES or None, instance=matricula)
+
+    if form.is_valid():
+        form.save()
+        return redirect('list_menu_pagamentos_alunos')
+
+    return render(request, 'financeiro/editar_matricula.html', {'form': form, 'matricula': matricula})
+
+#----------- List Aluno Geradas cobranca -------------------------------
+
+def aluno_list_financeiro(request):
+
+    alunos = Aluno.objects.filter(id=1)
+
+    return render(request, 'financeiro/aluno_list_financeiro.html', {'alunos':alunos})
 
 
 #----------- Aprovacao de Matriculas -------------------------------
@@ -25,7 +64,7 @@ def List_menu_pagamentos_alunos(request):
 
     matriculas = Matricula.objects.all()
 
-    return render(request, 'financeiro/financeiro_status_pagamentos.html', {'matriculas':matriculas})
+    return render(request, 'core/financeiro.html', {'matriculas':matriculas})
 
 
 
@@ -95,6 +134,8 @@ def defmensalidades(matriculaid, nomeAluno, turma,
             parcelaqualdequal = parcelaqualdequal + 1
 
             futuro = date.fromordinal(futuro.toordinal()+30) # hoje + 30 dias
+
+
     pass
 
     return None

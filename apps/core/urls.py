@@ -11,7 +11,7 @@ from apps.registro_hora_extra.api.views import RegistroHoraExtraViewSet
 
 router = routers.DefaultRouter()
 router.register(r'api/users', views.UserViewSet)
-router.register(r'groups/groups', views.GroupViewSet)
+router.register(r'api/groups', views.GroupViewSet)
 router.register(r'api/funcionarios', FuncionarioViewSet)
 router.register(r'api/horaextra', RegistroHoraExtraViewSet)
 
@@ -25,8 +25,9 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dashboard'),
     path('administrativo/', administracao, name='administrativo'),
     path('secretaria/', secretaria, name='secretaria'),
+    path('coordenacao/', coordenacao, name='coordenacao'),
     path('logout/', my_logout, name='mylogout'),
 
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

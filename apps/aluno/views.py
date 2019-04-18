@@ -16,6 +16,7 @@ from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from django.template.loader import get_template
 import xhtml2pdf.pisa as pisa
+from .forms import AlunoForm
 # ----------------- Funcões para Aluno --- --------------------------
 
 
@@ -35,8 +36,8 @@ def Alunolist2(request):#list aluno para fazer uma nova matricula
 
 class AlunoEdit(UpdateView):
     model = Aluno
-    fields = ['primeironome','segundonome','idade','cpf','RG',
-        'datadenascimento','responsavel']
+    form_class = AlunoForm
+    #context_object_name = 'matriculas'
 
 class AlunoDelete(DeleteView):
     model = Aluno
@@ -45,13 +46,14 @@ class AlunoDelete(DeleteView):
 
 class AlunoNovo(CreateView):
     model = Aluno
-    fields = ['primeironome', 'segundonome', 'idade', 'cpf', 'RG',
-        'datadenascimento','responsavel']
+    form_class = AlunoForm
 
     def form_valid(self, form):
         aluno = form.save(commit=False)
         aluno.empresa = self.request.user.funcionario.empresa
+        #print(aluno.datadenascimento) imprimir datanascimento no console
         aluno.save()
+
         return super(AlunoNovo, self).form_valid(form)
 
 class AlunoDetail(DetailView):

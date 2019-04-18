@@ -9,3 +9,10 @@ class MatriculaFormEditarFinanceiro(forms.ModelForm):
         'totalapagar', 'observacao']
         # 'statusfinanceiro',
         #'emitidosBoletos']
+
+#-------------------------------------------------------
+
+class MatriculaConferirFormEditar(forms.ModelForm):
+   class Meta:
+       model = Matricula
+       fields = ['status_coordenacao','status_financeiro']

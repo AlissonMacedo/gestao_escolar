@@ -33,8 +33,7 @@ urlpatterns = [
         name='detail_turma'),
     path('vendas/matriculadosturma/<int:id>/', MatriculadosTurmaList,
         name='matriculadosturma'),
-
-
+        
 #---- URLs teste submenu -----------------------------------------------
 
 

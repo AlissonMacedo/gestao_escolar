@@ -1,58 +1,164 @@
-{% extends "base.html" %}
-{% load bootstrap %}
+{% extends "core/base.html" %}
+{% load static %}
 {% block container %}
+{% load my_tags %}
+{% current_time "%A de %B de 20%y" as the_time %}
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START CONTENT -->
 
-<div class="col-md-8">
-  <div class="panel panel-warning">
-    <div class="panel-heading text-center">
-      <h3 class="panel-title">Cadastrar um novo aluno</h3>
-    </div>
-    <div class="panel-body">
-      <table class="table table-hover">
-        <tbody>
-          <tr>
-            <form class="col s12" method="post" enctype="multipart/form-data">{% csrf_token %}
-              <div class="form-caduser">
-                {{ form|bootstrap }}
-              </div>
-              <div>
-              <br>
-                {% if object.id > 0 %}
-                <div class="well well-lg">
-                  <h4><b>Documentos</b></h4>
-                  {% for documentoaluno in object.documentoaluno_set.all %}
-                  <li>
-                    <a href="{{ documentoaluno.arquivo.url }}"> {{ documentoaluno }}</a><br>
-                  </li>
-                  {% endfor %}
-                </div>
-                {% endif %}
-                
-                
-          </tr>
-        </tbody>
-      </table>
-      <!--
-      <div>
-      <img src="{{ aluno.foto.url }}" height="200" border="1"/>
-      <br>
-      <img src="{{ aluno.fotodocumento.url }}" height="200" border="1"/>
-      <br>
+<section id="content">
+<!--breadcrumbs start-->
+<div id="breadcrumbs-wrapper">
+  <!-- Search for small screen -->
+  <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+      <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col s10 m6 l6">
+        {% if object %}
+        <h5 class="breadcrumbs-title">Editar um Aluno</h5>
+          {% else %}
+          <h5 class="breadcrumbs-title">Cadastrar um novo Aluno</h5>
+          {% endif %}
+        <ol class="breadcrumbs">
+          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li><a href="{% url 'secretaria' %}">Secretaria</a></li>
+          <li><a href="{% url 'list_alunos' %}">Alunos</a></li>
+          {% if object %}
+            <li class="active">Editar um Aluno</li>
+            {% else %}
+              <li class="active">Novo Aluno</li>
+          {% endif %}
+        </ol>
       </div>
-      -->
-      <div class=" ">
-        <button class='btn btn-xs btn-warning' type="submit">Salvar Cadastro</button>
-        {% if object.id > 0 %}
-          <a href="{% url 'deletar_aluno' aluno.id %}" 
-                class="btn btn-xs btn-danger">Deletar Aluno!</a>
-          <a href="{% url 'create_documento_aluno' object.id %}" 
-                class="btn btn-xs btn-info">Anexar Documento</a>
-        {% endif %}
+      <div class="col s2 m6 l6">
+        <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right" href="#!" data-activates="dropdown1">
+            <i class="material-icons hide-on-med-and-up">settings</i>
+            <span class="hide-on-small-onl">Settings</span>
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+          </li>
+          <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+          </li>
+          <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+          </li>
+        </ul>
       </div>
-      </form>
-    </div>
+      </div>
+  </div>
   </div>
 </div>
+<!--breadcrumbs end-->
 
+<!--Divisor Table-->
+<div class="divider"></div>
+<!--start container-->
+<div class="container">
+  <!------START Basic Form----->
+  <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <div class="card-panel">
+          {% if object %}
+            <h4 class="header2">Editar um Aluno</h4>
+            {% else %}
+              <h4 class="header2">Cadastrar um novo Aluno</h4>
+          {% endif %}
+          <div class="row">
+            <form class="col s12" method="POST" enctype="multipart/form-data">{% csrf_token %}
+              <div class="row">
+                <div class="input-field col s12 m6 l6">
+                  <input class='validate' type='text' name='primeironome' id='id_primeironome' maxlength="18" value='{{ object.primeironome }}'/>
+                  <label for="nome">Primeiro Nome</label>
+                </div>
+                <div class="input-field col s12 m6 l6">
+                  <input class='validate' type='text' name='segundonome' id='id_segundonome' maxlength="18" value='{{ object.segundonome }}'/>
+                  <label for="segundonome">Segundo Nome</label>
+                </div>
+                <div class="input-field col s12 m1 l1">
+                  <input class='validate' type='number' name='idade' id='id_idade' maxlength="2" value="{{ object.idade }}"/>
+                  <label for="id_idade">Idade</label>
+                </div>
+                <div class="input-field col s12 m4 l3">
+                  <input class='validate' type='number' name='cpf' id='id_cpf' maxlength="12" value="{{ object.cpf }}"/>
+                  <label for="id_cpf">CPF</label>
+                </div>
+                <div class="input-field col s12 m4 l4">
+                  <input class='validate' type='number' name='rg' id='id_rg' maxlength="11" value="{{ object.rg }}"/>
+                  <label for="id_rg">RG</label>
+                </div>
+                <div class="col s12 m4 l4 ">
+                  <label for="id_datadenascimento">Data Nascimento</label>
+                    <input id="id_datadenascimento" type="date" class="validate" name="datadenascimento" maxlength="8" value="{{ object.datadenascimento|date:"d-M-Y" }}">
+                </div>
+                <!-------------------------------------------------------------------------->
+                <div class="input-field col s12 m4 l4 ">
+                  <input id="id_responsavel" type="text" class="validate left" name="responsavel" maxlength="8" value="{{ object.responsavel }}">
+                  <label for="id_responsavel">Responsavel</label>
+                </div>
+                <div class="input-field col s12 m4 l4 ">
+                  <input id="id_telefone" type="text" class="validate left" name="telefone" maxlength="8" value="{{ object.telefone }}">
+                  <label for="id_responsavel">Telefone</label>
+                </div>
+                {% if object %}
+                <div class="input-field col s12 m4 l4">
+                  Atualmente: <a href="{{ user.funcionario.imagem.url }}">foto-funcionario/avatar-13_m4DbLsd.png</a><br>
+                  Modificar: <input type="file" name="imagem" accept="image/*" id="id_imagem">
+                </div>
+                {% else %}
+                  <div class="input-field col s12 m4 l4 disabled">
+                    <label for="id_responsavel">Foto: Salve e Edite o cadastro para adicionar uma foto.</label>
+                  </div>
+                {% endif %}
+              </div>
+              <div class='row'>
+                {% if funcionario %}
+                  <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large red">
+                      <i class="large material-icons">menu</i>
+                    </a>
+                    <ul>
+                      <li><a class="btn-floating yellow darken-1"><i class="material-icons">local_printshop</i></a></li>
+                      <li><a href="{% url 'deletar_funcionario' funcionario.id %}" class="btn-floating green"><i class="material-icons">delete_forever</i></a></li>
+                      <li><button type='submit' name='btn_login' class="btn-floating waves-effect waves-light blue"><i class="material-icons">save</i></button></li>
+                    </ul>
+                  </div>
+                {% else %}
+                  <div class="fixed-action-btn botao">
+                    <button type='submit' name='btn_login' class="btn-floating btn-large waves-effect waves-light blue"><i class="large material-icons">save</i></button>
+                  </div>
+                {% endif %}
+              </div>
+              {% if form.errors %}
+                <div class="input-field col s12 m12 l12">
+                  <p>NOT VALID</p>
+                  {% for errors in form.errors %}
+                      {{ errors }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+              <!-- <div class="divider"></div>
+              <div class="input-field col s12 m4 l4">
+                <label for="">Mariculas do Aluno</label> -->
 
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-------END Form------->
+</div>
+
+<style>
+  .fixed-action-btn{
+            margin-bottom: 23px;  //optional
+  }
+  .card {
+
+  }
+</style>
 {% endblock %}

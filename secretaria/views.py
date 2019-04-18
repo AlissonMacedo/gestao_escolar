@@ -18,7 +18,13 @@ from django.views.generic import (
     CreateView
 )
 
-from .forms import CursoForm, SalaForm, MatriculaForm, MatriculaFormEditar, TurmaForm
+from .forms import (
+                    CursoForm,
+                    SalaForm,
+                    MatriculaForm,
+                    MatriculaFormEditar,
+                    TurmaForm
+                    )
 from .models import Brand, Car
 from apps.departamentos.models import Departamento
 from apps.financeiro.views import defmensalidades
@@ -162,7 +168,6 @@ def deletar_turma(request, id):
 
     return render(request, 'vendas/turma/confirm_deletar_turma.html', {'turma': turma})
 
-
 # ---------- Funções para matricula ------------------------------------------
 
 @login_required
@@ -211,8 +216,6 @@ def editar_matricula(request, id):
     empresa_logada = request.user.funcionario.empresa
     aluno = matricula.nomeAluno
     turma = matricula.turma
-
-    departamentos = Departamento.objects.all()
 
     form = MatriculaFormEditar(request.POST or None,
                                request.FILES or None, instance=matricula)

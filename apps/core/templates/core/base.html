@@ -25,6 +25,7 @@
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" content="{% static 'dashboard/images/favicon/mstile-144x144.png' %}">
     <!-- For Windows Phone -->
+
     <!-- CORE CSS-->
     <link href="{% static 'dashboard/css/materialize.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'dashboard/css/style.css' %}" type="text/css" rel="stylesheet">
@@ -264,6 +265,17 @@
                 </ul>
               </ul>
             <!-- FIM DO SUBMENU SECRETARIA-->
+            <!-- SUBMENU COORDENACAO -->
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">school</i>COORDENAÇÃO<i class="material-icons right" style="margin-right:0;"></i></a>
+                <div class="collapsible-body">
+              <ul>
+                <li><a href="{% url 'coordenacao' %}"  class="waves-effect waves-blue"><i class="material-icons">pageview</i>Menu Coordenação</a></li>
+                <li><div class="divider"></div></li>
+              </ul>
+            </ul>
+          <!-- FIM DO SUBMENU SECRETARIA-->
             <!-- SUBMENU Financeiro -->
             <ul class="collapsible collapsible-accordion">
               <li>
@@ -272,7 +284,7 @@
               <ul>
                 <li><a href="{% url 'list_alunos' %}" class="waves-effect waves-blue" href="#"><i class="material-icons">person_pin</i>Alunos</a></li>
                 <li><a href="{% url 'list_matriculas' %}"  class="waves-effect waves-blue"><i class="material-icons">pageview</i>Matriculas</a></li>
-                <li><a href="{% url 'list_menu_pagamentos' %}"class="waves-effect waves-blue"><i class="material-icons">monetization_on</i>Pagamentos</a></li>
+                <li><a href="{% url 'list_menu_pagamentos_alunos' %}"class="waves-effect waves-blue"><i class="material-icons">monetization_on</i>Menu Financeiro</a></li>
                 <li><div class="divider"></div></li>
               </ul>
             </ul>

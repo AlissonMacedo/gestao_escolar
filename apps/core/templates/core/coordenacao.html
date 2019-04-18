@@ -15,11 +15,10 @@
           <div class="container">
             <div class="row">
               <div class="col s10 m6 l6">
-                <h5 class="breadcrumbs-title">Administrativo</h5>
+                <h5 class="breadcrumbs-title">Coordenação</h5>
                 <ol class="breadcrumbs">
                   <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                  <li><a href="{% url 'dashboard' %}">Financeiro</a></li>
-                  <li class="active">Administrativo</li>
+                  <li class="active">Coordenação</li>
                 </ol>
               </div>
               <div class="col s2 m6 l6">
@@ -52,50 +51,30 @@
                 <div class="container">
                   <div class="row">
                     <div class="col s12 m3">
-                      <a href="{% url 'list_menu_pagamentos_alunos' %}">
-                      <div class="card hoverable" >
-                        <div class="card-image">
-                          <img src="{% static 'home/images/gallary/29.png'%}"></a>
-                          <div class="card-content">
-                          <a href="{% url 'list_menu_pagamentos_alunos' %}"><p>Exibir Alunos</p></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col s12 m3">
-                      <a href="{% url 'list_mensalidades_status' id=5 %}">
+                      <a href="{% url 'list_matriculas_coordenacao_conferir' %}">
                       <div class="card hoverable" >
                         <div class="card-image">
                           <img src="{% static 'home/images/gallary/30.png'%}"></a>
                           <div class="card-content">
-                          <a href="{% url 'list_mensalidades_status' id=5 %}"><p>Pagamentos ABERTOS</p></a>
+                          <a href="{% url 'list_matriculas_coordenacao_conferir' %}"><p>Matriculas Conferir</p></a>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col s12 m3">
-                      <a href="{% url 'list_mensalidades_status' id=5 %}">
-                      <div class="card hoverable" >
-                        <div class="card-image">
-                          <img src="{% static 'home/images/gallary/30.png'%}"></a>
-                          <div class="card-content">
-                          <a href="{% url 'list_mensalidades_status' id=5 %}"><p>Pagamentos PAGO</p></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col s12 m3">
-                      <a href="{% url 'list_mensalidades_status' id=2 %}">
+                      <a href="{% url 'list_matriculas_coordenacao_conferidas' %}">
                       <div class="card hoverable" >
                         <div class="card-image">
                           <img src="{% static 'home/images/gallary/32.png'%}"></a>
                           <div class="card-content">
-                          <a href="{% url 'list_mensalidades_status' id=2 %}"><p>Pagamentos ATRAZO</p></a>
+                          <a href="{% url 'list_matriculas_coordenacao_conferidas' %}"><p>Matriculas Conferidas</p></a>
                           </div>
                         </div>
                       </div>
                     </div>
-
+                    
+                      </div>
+                    </div>
                   </div>
               </div>
             </div>

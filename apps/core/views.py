@@ -45,6 +45,11 @@ def secretaria(request):
     return render(request, 'core/secretaria.html', {'empresa_logada':empresa_logada})
 
 @login_required
+def coordenacao(request):
+    empresa_logada = request.user.funcionario.empresa
+    return render(request, 'core/coordenacao.html', {'empresa_logada':empresa_logada})
+
+@login_required
 def my_logout(request):
     logout(request)
     return redirect('dashboard')

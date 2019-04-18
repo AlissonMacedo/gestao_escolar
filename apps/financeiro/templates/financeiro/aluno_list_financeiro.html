@@ -72,7 +72,7 @@
                           <td>{{ aluno.idade }}</td>
                           <td>{{ aluno.datadenascimento|date:"d/m/y" }}</td>
                           <td>{{ aluno.responsavel }}</td>
-                          <td><a href="{% url 'editar_aluno' aluno.id %}" class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
+                          <td><a class="waves-effect waves-light btn-small"><i class="material-icons">edit</i></a></td>
                         </tr>
                       {% endfor %}
                     </tbody>
@@ -91,7 +91,7 @@
         <!-- END WRAPPER -->
             <!-- SART BUTTON -->
     <div class="fixed-action-btn botao">
-        <a href="{% url 'novo_aluno' %}"class="btn-floating btn-large waves-effect waves-light red">
+        <a class="btn-floating btn-large waves-effect waves-light red">
           <i class="large material-icons">add</i>
         </a>
     </div>
